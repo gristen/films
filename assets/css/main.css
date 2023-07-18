@@ -1,0 +1,168 @@
+body{
+    height: 100%;
+    background: #001424;
+}
+.navbar-brand{
+    color: #fff;
+}
+.navbar-nav .nav-link.active{
+    color: #fff;
+    font-size: 24px;
+}
+#navbarNav{
+    justify-content: end;
+}
+.navbar-brand{
+    font-size: 24px;
+}
+
+.navbar-nav .nav-link.active:hover {
+    color: yellow;
+
+}
+
+
+.film-prev{
+    width: 200px;
+
+
+}
+p {
+    margin: auto;
+    margin-top: 0;
+    margin-bottom: 0.4rem;
+}
+.card{
+    border-radius: 25px;
+    cursor: pointer;
+    justify-content: center;
+    border: 1px solid rgba(0,0,0.1);
+
+    width: 200px;
+    --bs-card-border-width: 0px;
+    background: #030a0f;
+
+}
+.scale {
+    border-radius: 25px;
+    transition: 0.5s; /* Время эффекта */
+   }
+   .scale:hover {
+    transform: scale(1.2); /* Увеличиваем масштаб */
+   }
+   .line {
+    border-bottom: 1px solid rgb(255, 255, 255); /* Параметры линии */
+   }
+
+   .linet {
+    width: 80%;
+    border-bottom: 5px solid rgb(255, 255, 255); /* Параметры линии */
+   }
+.card p {
+    color :#fff;
+}
+
+.Films{
+    color: #fff;
+    font-size: 40px;
+}
+
+.d-block{
+    object-fit: cover;
+    vertical-align: middle;
+    border-style: none;
+    height: 70vh;
+border-radius: 20px;
+height: 200px;
+}
+.carousel {
+    display: flex;
+    margin: 40px;
+    position: relative;
+}
+
+.text{
+    color: #fff;
+}
+.btn{
+    --bs-btn-padding-x: 2.75rem;
+    --bs-btn-bg: #001f42;
+    --bs-btn-border-color: #ffffff;
+    --bs-btn-hover-bg: #121416;
+    --bs-btn-hover-border-color: #6d7c93;
+    --bs-btn-active-bg: #000000;
+}
+
+
+
+
+.photu{
+    filter: alpha(Opacity=75); /* Полупрозрачность для IE */
+    opacity: 0.75; /* Полупрозрачность для других браузеров */ 
+    display: flex;
+    width: 100%;
+    border-radius: 18%;
+}
+
+.form-text {
+    margin-top: 0.25rem;
+    font-size: .875em;
+    color: #ffffff;
+}
+.erormesg{
+    width: 20%;
+    border-radius: 15px;
+    filter: alpha(Opacity=50); /* Полупрозрачность для IE */
+    opacity: 0.50; /* Полупрозрачность для других браузеров */ 
+    background-color: red;
+    padding: 5px;
+    margin: 15px
+}
+.py-3{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+}
+.aft{
+   
+        font-size: xxx-large;
+        color: white;
+        margin-left: 10%;
+    
+}
+.wrapper{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.header{
+    background-color: rgb(8, 25, 43);
+    padding: 30px;
+    text-align: center;
+}
+.main{
+    padding: 30px;
+    flex: 1 1 auto;
+}
+.footer{
+    background-color: rgb(32, 32, 32);
+    padding: 30px;
+    text-align: center;
+}
+
+.admh{
+margin-top: 15%;
+color: #fff;
+}
+.admhtwo{
+margin-top: 10%;
+color: #fff;
+}
+
+
+.posts{
+    margin: 0;
+    display: flex;
+}
