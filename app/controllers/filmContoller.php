@@ -17,7 +17,11 @@ class filmContoller extends Controller
         ]);
         $res = $q->fetchAll(\PDO::FETCH_ASSOC);
 
-
+        if ($res === [])
+        {
+            $this->view->generate('404.php',[],404);
+            return;
+        }
        $this->view->generate('film.php',[
            "film"=>$res[0],
        ]);

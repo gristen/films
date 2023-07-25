@@ -2,10 +2,10 @@
 
 require_once __DIR__."/vendor/autoload.php";
 
-//require_once __DIR__."/app/router/routes.php";
+//require_once __DIR__."/app/routes/routes.php";
 
 $route = $_GET['route']??'';
-$routes = require  __DIR__. '/app/router/routes.php';
+$routes = require __DIR__ . '/app/routes/routes.php';
 
 
 $isRouteFound = false;

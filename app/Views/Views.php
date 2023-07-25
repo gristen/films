@@ -17,7 +17,7 @@ class Views
         extract($vars); //Функция extract извлекает массив в переменные
         ob_start(); //буфер , в случае чего мы можем обратиться к потоку вывода и отслеживать проблемы с ним
 
-        include 'views/pages/'.$content_view;
+        include 'public/pages/'.$content_view;
 
         $buffer = ob_get_contents();
         ob_end_clean();

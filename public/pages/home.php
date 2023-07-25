@@ -33,40 +33,19 @@ use app\Services\Page;
     <section class="categoryujas">
         <h1 class="Films mb-5 mt-2">  Смотреть кино</h1>
         <div class="col-lg-12 d-flex justify-content-around">
-
-            <?php foreach ($films as $film):?>
-            <a href="">
-                <div class="card">
-                    <img  src="<?="uploads/preview-films/".$film['Film_path']?>" alt="..."class="scale">
-                    <p><?=$film['name']?></p>
-                </div>
-            </a>
-
-                </section>
-
-
-                <section class="categoryputy">
-        <h1 class="Films mb-5 mt-2">  Лучшие фильмы</h1>
-        <div class="col-lg-12 d-flex justify-content-around">
-          
-                <div class="card">
-                    <img  src="<?="uploads/preview-films/".$film['Film_path']?>" alt="..."class="scale">
-                    <p><?=$film['name']?></p>
-                </div>
-
-                </section>
-
+            <?php foreach ($films as $film): ?>
+                <a href="film/<?= $film->getId(); ?>">
+                    <div class="card">
+                        <img src="<?= "/uploads/preview-films/" . $film->getFilmPreviewPath(); ?>" class="scale">
+                        <p><?= $film->getName(); ?></p>
+                    </div>
+                </a>
             <?php endforeach; ?>
-
         </div>
 
     </div>
 
 </div>
-<div class="wrapper">
-            <header class="header">Я фывф</header>  
-            <main class="main">Я фывф</main> 
-            <footer class="footer">Я фывф</footer> 
-        </div>
+
 </body>
 </html>

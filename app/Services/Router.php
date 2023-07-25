@@ -39,7 +39,7 @@ class Router
 
     private static function not_found_page()
     {
-        require_once "views/error/404.php";
+        require_once "public/error/404.php";
     }
 
     public static function enable()

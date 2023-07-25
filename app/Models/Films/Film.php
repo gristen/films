@@ -4,23 +4,41 @@ namespace app\Models\Films;
 
 class Film
 {
-    protected $name;
-    protected $text;
-    protected $authorId;
-    protected $created;
+    private $id;
+    private $name;
+    private $text;
+    private $createdAt;
+    private $authorId;
 
+    private $filmPreviewPath;
+    private $filmPath;
+    private $hot;
+
+    public function __set($name, $value) //сюда прилетают название полей с БД которые не соответствуют с свойствами в классе и мы тут уже манипулируем с их названием
+    {
+        $camelCaseName = $this->underscoreToCamelCase($name);
+        $this->$camelCaseName = $value;
+    }
     /**
-     * @return mixed
+     * @return string
      */
-    public function getName()
+    public function getName() :string
     {
         return $this->name;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getText()
+    public function getId() :int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText() :string
     {
         return $this->text;
     }
@@ -28,16 +46,15 @@ class Film
     /**
      * @return mixed
      */
-    public function getAuthorId()
+    public function getFilmPreviewPath()
     {
-        return $this->authorId;
+        return $this->filmPreviewPath;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCreated()
+
+
+    private function underscoreToCamelCase(string $source): string
     {
-        return $this->created;
+        return lcfirst(str_replace('_', '', ucwords($source, '_')));
     }
 }
