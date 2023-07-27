@@ -35,9 +35,10 @@ use app\Services\Page;
         <div class="col-lg-12 d-flex justify-content-around">
             <?php foreach ($films as $film): ?>
                 <a href="film/<?= $film->getId(); ?>">
+
                     <div class="card">
                         <img src="<?= "/uploads/preview-films/" . $film->getFilmPreviewPath(); ?>" class="scale">
-                        <p><?= $film->getName(); ?></p>
+                        <p class="text-bg-danger"><?= $film->getName(); ?></p>
                     </div>
                 </a>
             <?php endforeach; ?>

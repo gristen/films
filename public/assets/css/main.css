@@ -1,6 +1,6 @@
 body{
     height: 100%;
-    background: #001424;
+    background-color: #001424;
 }
 .navbar-brand{
     color: #fff;
@@ -31,6 +31,7 @@ p {
     margin: auto;
     margin-top: 0;
     margin-bottom: 0.4rem;
+
 }
 .card{
     border-radius: 25px;
@@ -98,7 +99,7 @@ height: 200px;
 
 .photu{
     filter: alpha(Opacity=75); /* Полупрозрачность для IE */
-    opacity: 0.75; /* Полупрозрачность для других браузеров */ 
+    opacity: 0.75; /* Полупрозрачность для других браузеров */
     display: flex;
     width: 100%;
     border-radius: 18%;
@@ -113,7 +114,7 @@ height: 200px;
     width: 20%;
     border-radius: 15px;
     filter: alpha(Opacity=50); /* Полупрозрачность для IE */
-    opacity: 0.50; /* Полупрозрачность для других браузеров */ 
+    opacity: 0.50; /* Полупрозрачность для других браузеров */
     background-color: red;
     padding: 5px;
     margin: 15px
@@ -126,11 +127,11 @@ height: 200px;
     height: 80px;
 }
 .aft{
-   
+
         font-size: xxx-large;
         color: white;
         margin-left: 10%;
-    
+
 }
 .wrapper{
     min-height: 100%;

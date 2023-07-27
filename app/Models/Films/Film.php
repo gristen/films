@@ -19,6 +19,7 @@ class Film
         $camelCaseName = $this->underscoreToCamelCase($name);
         $this->$camelCaseName = $value;
     }
+
     /**
      * @return string
      */
