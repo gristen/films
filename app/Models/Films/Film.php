@@ -28,7 +28,12 @@ class Film
     public static function findAll():array
     {
         $db = new DB();
-        return $db->query("SELECT * FROM `films`;",[],Film::class);
+        return $db->query("SELECT * FROM `".static::getTableName() . '`;',[],static::class);
+    }
+
+    public static function getTableName()
+    {
+        return 'films';
     }
 
     /**
