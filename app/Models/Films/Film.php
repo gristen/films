@@ -2,6 +2,8 @@
 
 namespace app\Models\Films;
 
+use app\Services\DB;
+
 class Film
 {
     private $id;
@@ -18,6 +20,15 @@ class Film
     {
         $camelCaseName = $this->underscoreToCamelCase($name);
         $this->$camelCaseName = $value;
+    }
+
+    /**
+     * @return Film[]
+     */
+    public static function findAll():array
+    {
+        $db = new DB();
+        return $db->query("SELECT * FROM `films`;",[],Film::class);
     }
 
     /**

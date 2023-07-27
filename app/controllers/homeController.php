@@ -12,7 +12,7 @@ class homeController extends Controller
 
     public function action()
     {
-        $films =  $this->db->query("SELECT * FROM `films`;",[],Film::class);
+        $films = Film::findAll();
       $this->view->generate("home.php",['films'=>$films]);
 
 
