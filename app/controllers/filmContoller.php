@@ -3,11 +3,10 @@
 namespace app\controllers;
 
 use app\Services\DB;
+use app\Services\Logger;
 
 class filmContoller extends Controller
 {
-
-
     public function view(int $filmId)
     {
         $db = new DB();
@@ -25,6 +24,9 @@ class filmContoller extends Controller
        $this->view->generate('film.php',[
            "film"=>$res[0],
        ]);
+
+        var_dump($res);
+
 
     }
 }

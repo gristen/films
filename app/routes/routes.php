@@ -14,6 +14,6 @@ return [
 
     '~^$~' => [\app\controllers\homeController::class, 'action'],
     '~^film/(\d+)$~' => [\app\controllers\filmContoller::class, 'view'],
-//    '~^home~' => [\app\controllers\homeController::class, 'action'],
+    '~^home~' => [\app\controllers\homeController::class, 'action'],
 //    '~^main~' => [\app\controllers\homeController::class, 'action'],
 ];

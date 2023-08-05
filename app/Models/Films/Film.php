@@ -7,7 +7,7 @@ use app\Services\DB;
 class Film
 {
     private $id;
-    private $name;
+   // private $name;
     private $text;
     private $createdAt;
     private $authorId;
@@ -16,8 +16,13 @@ class Film
     private $filmPath;
     private $hot;
 
+
+    /***/
+
     public function __set($name, $value) //сюда прилетают название полей с БД которые не соответствуют с свойствами в классе и мы тут уже манипулируем с их названием
     {
+        echo "Название " .$name . "значение ".$value . '<br>';
+
         $camelCaseName = $this->underscoreToCamelCase($name);
         $this->$camelCaseName = $value;
     }
