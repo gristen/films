@@ -2,41 +2,24 @@
 
 namespace app\Models\Films;
 
+use app\Models\ActiveRecordEntity;
+use app\Models\Users\UsersModel;
 use app\Services\DB;
 
-class Film
+class Film extends ActiveRecordEntity
 {
-    private $id;
-   // private $name;
-    private $text;
-    private $createdAt;
-    private $authorId;
 
-    private $filmPreviewPath;
-    private $filmPath;
-    private $hot;
+    protected $name;
+    protected $text;
+    protected $createdAt;
+    protected $authorId;
+
+    protected $filmPreviewPath;
+    protected $filmPath;
+    protected $hot;
 
 
-    /***/
-
-    public function __set($name, $value) //сюда прилетают название полей с БД которые не соответствуют с свойствами в классе и мы тут уже манипулируем с их названием
-    {
-        echo "Название " .$name . "значение ".$value . '<br>';
-
-        $camelCaseName = $this->underscoreToCamelCase($name);
-        $this->$camelCaseName = $value;
-    }
-
-    /**
-     * @return Film[]
-     */
-    public static function findAll():array
-    {
-        $db = new DB();
-        return $db->query("SELECT * FROM `".static::getTableName() . '`;',[],static::class);
-    }
-
-    public static function getTableName()
+    protected static function getTableName():string
     {
         return 'films';
     }
@@ -48,14 +31,9 @@ class Film
     {
         return $this->name;
     }
-
     /**
      * @return int
      */
-    public function getId() :int
-    {
-        return $this->id;
-    }
 
     /**
      * @return string
@@ -73,10 +51,29 @@ class Film
         return $this->filmPreviewPath;
     }
 
-
-
-    private function underscoreToCamelCase(string $source): string
+    /**
+     * @return mixed
+     */
+    public function getFilmPath()
     {
-        return lcfirst(str_replace('_', '', ucwords($source, '_')));
+        return $this->filmPath;
     }
+
+    /**
+     * @return int
+     */
+//    public function getAuthorId()
+//    {
+//        return $this->authorId;
+//    }
+
+public function getAuthor():UsersModel //Возвращаем пользователя который опубликовал фильм
+{
+    return UsersModel::getById($this->authorId);
+}
+
+
+
+
+
 }

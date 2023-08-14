@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-class AdminController extends Controller
+class AdminController
 {
     public function action()
     {

@@ -6,7 +6,7 @@ namespace app\controllers;
 use app\Models\Users\UsersModel;
 use app\Exceptions\InvalidArgumentException;
 
-class UsersController extends Controller
+class UsersController
 {
 
     public function index_register()

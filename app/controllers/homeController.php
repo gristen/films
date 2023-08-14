@@ -13,10 +13,13 @@ class homeController extends Controller
 
     public function action()
     {
+
+
         $films = Film::findAll();
-        Logger::logRequest(['test-message']);
+
       $this->view->generate("home.php",['films'=>$films]);
 
+       // echo json_encode($films);
 
 
     }
