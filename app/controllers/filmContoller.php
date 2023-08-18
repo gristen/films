@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\Exceptions\NotFoundException;
 use app\Models\Films\Film;
 use app\Models\Users\UsersModel;
 use app\Services\DB;
@@ -16,8 +17,7 @@ class filmContoller extends Controller
 
         if ($film === null)
         {
-            $this->view->generate('404.php',[],404);
-            return;
+           throw new  NotFoundException();
         }
 
       //  $filmAuthor = UsersModel::getById($film->getAuthorId()); // передает в метод название бд users , а в скобочках уже какой пользователь нужен , т.е id authora
@@ -26,5 +26,47 @@ class filmContoller extends Controller
            "film"=>$film,
           // "author"=>$filmAuthor,
        ]);
+    }
+    public function edit(int $filmId):void
+    {
+            $film = Film::getById($filmId);
+
+        if ($film === null)
+        {
+            $this->view->generate('404.php',[],404);
+            return;
+        }
+
+
+
+            $film->save();
+    }
+
+    public function add():void
+    {
+//        $author = UsersModel::getById(1);
+//        $film = new Film();
+//        $film->setAuthor($author);
+//        $film->setFilmPath("path");
+//        $film->setText("text");
+//        $film->setFilmPreviewPath("FilmPreviewPath");
+//        $film->setHot(1);
+//        $film->setName("nazvanie");
+//         $film->save();
+   // var_dump($film);
+    }
+
+    public function delete (int $id)
+    {
+
+
+        $article = Film::getById($id);
+        if ($article) {
+            $article->delete();
+            echo ' Статья удалена';
+        }
+
+
+
     }
 }

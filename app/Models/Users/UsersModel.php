@@ -2,6 +2,7 @@
 
 namespace app\Models\Users;
 
+use app\Exceptions\InvalidArgumentException;
 use app\Models\ActiveRecordEntity;
 
 class UsersModel extends ActiveRecordEntity
@@ -11,9 +12,9 @@ class UsersModel extends ActiveRecordEntity
     protected $email;
     protected $isConfirmed;
 
-    protected $role;
+
     protected $password;
-    protected $avatar;
+
     protected $authToken;
     protected $created;
 
@@ -28,6 +29,20 @@ class UsersModel extends ActiveRecordEntity
     protected static function getTableName(): string
     {
       return 'users';
+    }
+
+    public static function signUP(array $userData) :UsersModel
+    {
+        $user = new UsersModel();
+        $user->username = "asd";
+        $user->email = "asdasdadssad";
+        $user->password = password_hash($userData['password'], PASSWORD_DEFAULT);
+        $user->isConfirmed = 0;
+        $user->authToken = sha1(random_bytes(100)) . sha1(random_bytes(100));
+        $user->save();
+
+        return $user;
+
     }
 
 

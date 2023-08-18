@@ -10,6 +10,7 @@ class Film extends ActiveRecordEntity
 {
 
     protected $name;
+
     protected $text;
     protected $createdAt;
     protected $authorId;
@@ -66,6 +67,53 @@ class Film extends ActiveRecordEntity
 //    {
 //        return $this->authorId;
 //    }
+
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    public function setAuthor(UsersModel $user):void
+    {
+        $this->authorId = $user->getId();
+    }
+
+    /**
+     * @param mixed $text
+     */
+    public function setText($text): void
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @param mixed $filmPath
+     */
+    public function setFilmPath($filmPath): void
+    {
+        $this->filmPath = $filmPath;
+    }
+
+    /**
+     * @param mixed $filmPreviewPath
+     */
+    public function setFilmPreviewPath($filmPreviewPath): void
+    {
+        $this->filmPreviewPath = $filmPreviewPath;
+    }
+
+    /**
+     * @param mixed $hot
+     */
+    public function setHot($hot): void
+    {
+        $this->hot = $hot;
+    }
+
 
 public function getAuthor():UsersModel //Возвращаем пользователя который опубликовал фильм
 {
