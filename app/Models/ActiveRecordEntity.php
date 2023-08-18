@@ -134,21 +134,25 @@ abstract class ActiveRecordEntity
 
        $db = DB::getInstance();
        $db->query($sql,$params2value,static::class);
-     //  $this->refresh();
+       $this->id = $db->getLastInsertId();
+
+       $this->refresh();
 
     }
 
     private function refresh(): void
     {
+
         $objectFromDb = static::getById($this->id);
         $reflector = new \ReflectionObject($objectFromDb);
         $properties = $reflector->getProperties();
 
         foreach ($properties as $property) {
-            $property->setAccessible(true);
+            $property->setAccessible(true);//setAccessible делает св-ва доступными для чтения\записи
             $propertyName = $property->getName();
             $this->$propertyName = $property->getValue($objectFromDb);
         }
+       // var_dump($this);
     }
 
 

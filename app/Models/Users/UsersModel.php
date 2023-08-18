@@ -12,6 +12,7 @@ class UsersModel extends ActiveRecordEntity
     protected $email;
     protected $isConfirmed;
 
+    protected $role;
 
     protected $password;
 
@@ -34,8 +35,9 @@ class UsersModel extends ActiveRecordEntity
     public static function signUP(array $userData) :UsersModel
     {
         $user = new UsersModel();
-        $user->username = "asd";
-        $user->email = "asdasdadssad";
+        $user->username = $userData['username'];
+        $user->email = $userData['email'];
+        $user->role = 1;
         $user->password = password_hash($userData['password'], PASSWORD_DEFAULT);
         $user->isConfirmed = 0;
         $user->authToken = sha1(random_bytes(100)) . sha1(random_bytes(100));
