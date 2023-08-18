@@ -5,7 +5,7 @@ namespace app\Views;
 class Views
 {
     private $extraVars = [];
-
+    
     public function setVar(string $name, $value): void
     {
         $this->extraVars[$name] = $value;
