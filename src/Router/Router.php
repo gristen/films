@@ -17,11 +17,23 @@ class Router
     public function dispatch(string $uri, string $method): void
     {
         $route = $this->findRoute($uri, $method);
+
         if (! $route) {
             echo '404';
             exit();
         }
-        $route->getAction()();
+
+        if (is_array($route->getAction())) {
+            [$controller,$action] = $route->getAction();
+
+            $controller = new $controller();
+
+            call_user_func([$controller, $action]);
+
+        } else {
+            $route->getAction()();
+        }
+
     }
 
     private function findRoute($uri, $method): Route|false
