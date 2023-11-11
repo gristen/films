@@ -45,18 +45,17 @@ class Validator
         switch ($ruleName) {
             case 'required':
                 if (empty($value)) {
-                    return 'Field is required';
-
+                    return "Поле $key пустое";
                 }
                 break;
             case 'min':
                 if (strlen($value) < $ruleValue) {
-                    return 'мало символов';
+                    return "Поле $key должно содержать не менее 3 символов";
                 }
                 break;
             case 'max':
                 if (strlen($value) > $ruleValue) {
-                    return 'много символов';
+                    return "Поле $key не должно быть более 255 символов";
                 }
                 break;
         }
