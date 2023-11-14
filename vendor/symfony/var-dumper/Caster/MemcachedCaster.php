@@ -21,6 +21,7 @@ use Symfony\Component\VarDumper\Cloner\Stub;
 class MemcachedCaster
 {
     private static array $optionConstants;
+
     private static array $defaultOptions;
 
     /**

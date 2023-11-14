@@ -1,59 +1,61 @@
-<?php return array(
-    'root' => array(
+<?php
+
+return [
+    'root' => [
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
         'reference' => '2b9f807394360b8425b2d57fdc9faa82030d1b22',
         'type' => 'library',
-        'install_path' => __DIR__ . '/../../',
-        'aliases' => array(),
+        'install_path' => __DIR__.'/../../',
+        'aliases' => [],
         'dev' => true,
-    ),
-    'versions' => array(
-        '__root__' => array(
+    ],
+    'versions' => [
+        '__root__' => [
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
             'reference' => '2b9f807394360b8425b2d57fdc9faa82030d1b22',
             'type' => 'library',
-            'install_path' => __DIR__ . '/../../',
-            'aliases' => array(),
+            'install_path' => __DIR__.'/../../',
+            'aliases' => [],
             'dev_requirement' => false,
-        ),
-        'laravel/pint' => array(
+        ],
+        'laravel/pint' => [
             'pretty_version' => 'v1.13.2',
             'version' => '1.13.2.0',
             'reference' => 'bbb13460d7f8c5c0cd9a58109beedd79cd7331ff',
             'type' => 'project',
-            'install_path' => __DIR__ . '/../laravel/pint',
-            'aliases' => array(),
+            'install_path' => __DIR__.'/../laravel/pint',
+            'aliases' => [],
             'dev_requirement' => true,
-        ),
-        'symfony/deprecation-contracts' => array(
+        ],
+        'symfony/deprecation-contracts' => [
             'pretty_version' => 'v3.3.0',
             'version' => '3.3.0.0',
             'reference' => '7c3aff79d10325257a001fcf92d991f24fc967cf',
             'type' => 'library',
-            'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
-            'aliases' => array(),
+            'install_path' => __DIR__.'/../symfony/deprecation-contracts',
+            'aliases' => [],
             'dev_requirement' => true,
-        ),
-        'symfony/polyfill-mbstring' => array(
+        ],
+        'symfony/polyfill-mbstring' => [
             'pretty_version' => 'v1.28.0',
             'version' => '1.28.0.0',
             'reference' => '42292d99c55abe617799667f454222c54c60e229',
             'type' => 'library',
-            'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
-            'aliases' => array(),
+            'install_path' => __DIR__.'/../symfony/polyfill-mbstring',
+            'aliases' => [],
             'dev_requirement' => true,
-        ),
-        'symfony/var-dumper' => array(
+        ],
+        'symfony/var-dumper' => [
             'pretty_version' => 'v6.3.4',
             'version' => '6.3.4.0',
             'reference' => '2027be14f8ae8eae999ceadebcda5b4909b81d45',
             'type' => 'library',
-            'install_path' => __DIR__ . '/../symfony/var-dumper',
-            'aliases' => array(),
+            'install_path' => __DIR__.'/../symfony/var-dumper',
+            'aliases' => [],
             'dev_requirement' => true,
-        ),
-    ),
-);
+        ],
+    ],
+];

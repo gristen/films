@@ -174,7 +174,7 @@ class DOMCaster
             'substituteEntities' => $dom->substituteEntities,
         ];
 
-        if (!($filter & Caster::EXCLUDE_VERBOSE)) {
+        if (! ($filter & Caster::EXCLUDE_VERBOSE)) {
             $formatOutput = $dom->formatOutput;
             $dom->formatOutput = true;
             $a += [Caster::PREFIX_VIRTUAL.'xml' => $dom->saveXML()];

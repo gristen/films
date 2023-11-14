@@ -57,7 +57,7 @@ final class FFICaster
             CType::TYPE_SINT64,
             CType::TYPE_BOOL,
             CType::TYPE_CHAR,
-            CType::TYPE_ENUM => null !== $data ? [Caster::PREFIX_VIRTUAL.'cdata' => $data->cdata] : [],
+            CType::TYPE_ENUM => $data !== null ? [Caster::PREFIX_VIRTUAL.'cdata' => $data->cdata] : [],
             CType::TYPE_POINTER => self::castFFIPointer($stub, $type, $data),
             CType::TYPE_STRUCT => self::castFFIStructLike($type, $data),
             CType::TYPE_FUNC => self::castFFIFunction($stub, $type),
@@ -69,7 +69,7 @@ final class FFICaster
     {
         $arguments = [];
 
-        for ($i = 0, $count = $type->getFuncParameterCount(); $i < $count; ++$i) {
+        for ($i = 0, $count = $type->getFuncParameterCount(); $i < $count; $i++) {
             $param = $type->getFuncParameterType($i);
 
             $arguments[] = $param->getName();
@@ -101,7 +101,7 @@ final class FFICaster
     {
         $ptr = $type->getPointerType();
 
-        if (null === $data) {
+        if ($data === null) {
             return [Caster::PREFIX_VIRTUAL.'0' => $ptr];
         }
 
@@ -116,10 +116,10 @@ final class FFICaster
     {
         $result = [];
 
-        for ($i = 0; $i < self::MAX_STRING_LENGTH; ++$i) {
+        for ($i = 0; $i < self::MAX_STRING_LENGTH; $i++) {
             $result[$i] = $data[$i];
 
-            if ("\0" === $result[$i]) {
+            if ($result[$i] === "\0") {
                 return implode('', $result);
             }
         }
@@ -144,11 +144,11 @@ final class FFICaster
             // Retrieving the value of a field from a union containing
             // a pointer is not a safe operation, because may contain
             // incorrect data.
-            $isUnsafe = $isUnion && CType::TYPE_POINTER === $field->getKind();
+            $isUnsafe = $isUnion && $field->getKind() === CType::TYPE_POINTER;
 
             if ($isUnsafe) {
                 $result[Caster::PREFIX_VIRTUAL.$name.'?'] = $field;
-            } elseif (null === $data) {
+            } elseif ($data === null) {
                 $result[Caster::PREFIX_VIRTUAL.$name] = $field;
             } else {
                 $fieldName = $data->{$name} instanceof CData ? '' : $field->getName().' ';

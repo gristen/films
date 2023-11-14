@@ -112,7 +112,7 @@ class SplCaster
         try {
             $c->isReadable();
         } catch (\RuntimeException $e) {
-            if ('Object not initialized' !== $e->getMessage()) {
+            if ($e->getMessage() !== 'Object not initialized') {
                 throw $e;
             }
 
@@ -120,7 +120,7 @@ class SplCaster
 
             return $a;
         } catch (\Error $e) {
-            if ('Object not initialized' !== $e->getMessage()) {
+            if ($e->getMessage() !== 'Object not initialized') {
                 throw $e;
             }
 
@@ -208,7 +208,7 @@ class SplCaster
             $storage[] = new EnumStub([
                 'object' => $obj,
                 'info' => $clone->getInfo(),
-             ]);
+            ]);
         }
 
         $a += [
@@ -249,7 +249,7 @@ class SplCaster
             $map[] = new EnumStub([
                 'object' => $obj,
                 'data' => $data,
-             ]);
+            ]);
         }
 
         $a += [
@@ -264,7 +264,7 @@ class SplCaster
         $prefix = Caster::PREFIX_VIRTUAL;
         $flags = $c->getFlags();
 
-        if (!($flags & \ArrayObject::STD_PROP_LIST)) {
+        if (! ($flags & \ArrayObject::STD_PROP_LIST)) {
             $c->setFlags(\ArrayObject::STD_PROP_LIST);
             $a = Caster::castObject($c, $c::class, method_exists($c, '__debugInfo'), $stub->class);
             $c->setFlags($flags);

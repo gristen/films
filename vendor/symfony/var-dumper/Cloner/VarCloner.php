@@ -34,20 +34,20 @@ class VarCloner extends AbstractCloner
         $minDepth = $this->minDepth;
         $currentDepth = 0;              // Current tree depth
         $currentDepthFinalIndex = 0;    // Final $queue index for current tree depth
-        $minimumDepthReached = 0 === $minDepth; // Becomes true when minimum tree depth has been reached
+        $minimumDepthReached = $minDepth === 0; // Becomes true when minimum tree depth has been reached
         $cookie = (object) [];          // Unique object used to detect hard references
         $a = null;                      // Array cast for nested structures
         $stub = null;                   // Stub capturing the main properties of an original item value
-                                        // or null if the original value is used directly
+        // or null if the original value is used directly
 
         $arrayStub = new Stub();
         $arrayStub->type = Stub::TYPE_ARRAY;
         $fromObjCast = false;
 
-        for ($i = 0; $i < $len; ++$i) {
+        for ($i = 0; $i < $len; $i++) {
             // Detect when we move on to the next tree depth
             if ($i > $currentDepthFinalIndex) {
-                ++$currentDepth;
+                $currentDepth++;
                 $currentDepthFinalIndex = $len - 1;
                 if ($currentDepth >= $minDepth) {
                     $minimumDepthReached = true;
@@ -65,10 +65,11 @@ class VarCloner extends AbstractCloner
                     unset($stub);               // independent from the original structure
                     if (null !== $vals[$k] = $hardRefs[$zvalRef] ?? null) {
                         $v = $vals[$k];
-                        if ($v->value instanceof Stub && (Stub::TYPE_OBJECT === $v->value->type || Stub::TYPE_RESOURCE === $v->value->type)) {
-                            ++$v->value->refCount;
+                        if ($v->value instanceof Stub && ($v->value->type === Stub::TYPE_OBJECT || $v->value->type === Stub::TYPE_RESOURCE)) {
+                            $v->value->refCount++;
                         }
-                        ++$v->refCount;
+                        $v->refCount++;
+
                         continue;
                     }
                     $vals[$k] = new Stub();
@@ -79,26 +80,26 @@ class VarCloner extends AbstractCloner
                 // Create $stub when the original value $v cannot be used directly
                 // If $v is a nested structure, put that structure in array $a
                 switch (true) {
-                    case null === $v:
+                    case $v === null:
                     case \is_bool($v):
                     case \is_int($v):
                     case \is_float($v):
                         continue 2;
                     case \is_string($v):
-                        if ('' === $v) {
+                        if ($v === '') {
                             continue 2;
                         }
-                        if (!preg_match('//u', $v)) {
+                        if (! preg_match('//u', $v)) {
                             $stub = new Stub();
                             $stub->type = Stub::TYPE_STRING;
                             $stub->class = Stub::STRING_BINARY;
-                            if (0 <= $maxString && 0 < $cut = \strlen($v) - $maxString) {
+                            if ($maxString >= 0 && 0 < $cut = \strlen($v) - $maxString) {
                                 $stub->cut = $cut;
                                 $stub->value = substr($v, 0, -$cut);
                             } else {
                                 $stub->value = $v;
                             }
-                        } elseif (0 <= $maxString && isset($v[1 + ($maxString >> 2)]) && 0 < $cut = mb_strlen($v, 'UTF-8') - $maxString) {
+                        } elseif ($maxString >= 0 && isset($v[1 + ($maxString >> 2)]) && 0 < $cut = mb_strlen($v, 'UTF-8') - $maxString) {
                             $stub = new Stub();
                             $stub->type = Stub::TYPE_STRING;
                             $stub->class = Stub::STRING_UTF8;
@@ -111,7 +112,7 @@ class VarCloner extends AbstractCloner
                         break;
 
                     case \is_array($v):
-                        if (!$v) {
+                        if (! $v) {
                             continue 2;
                         }
                         $stub = $arrayStub;
@@ -127,15 +128,15 @@ class VarCloner extends AbstractCloner
                             $stub->class = $v::class;
                             $stub->value = $v;
                             $stub->handle = $h;
-                            $a = $this->castObject($stub, 0 < $i);
+                            $a = $this->castObject($stub, $i > 0);
                             if ($v !== $stub->value) {
-                                if (Stub::TYPE_OBJECT !== $stub->type || null === $stub->value) {
+                                if ($stub->type !== Stub::TYPE_OBJECT || $stub->value === null) {
                                     break;
                                 }
                                 $stub->handle = $h = spl_object_id($stub->value);
                             }
                             $stub->value = null;
-                            if (0 <= $maxItems && $maxItems <= $pos && $minimumDepthReached) {
+                            if ($maxItems >= 0 && $maxItems <= $pos && $minimumDepthReached) {
                                 $stub->cut = \count($a);
                                 $a = null;
                             }
@@ -145,7 +146,7 @@ class VarCloner extends AbstractCloner
                             $objects[] = $v;
                         } else {
                             $stub = $objRefs[$h];
-                            ++$stub->refCount;
+                            $stub->refCount++;
                             $a = null;
                         }
                         break;
@@ -159,9 +160,9 @@ class VarCloner extends AbstractCloner
                             }
                             $stub->value = $v;
                             $stub->handle = $h;
-                            $a = $this->castResource($stub, 0 < $i);
+                            $a = $this->castResource($stub, $i > 0);
                             $stub->value = null;
-                            if (0 <= $maxItems && $maxItems <= $pos && $minimumDepthReached) {
+                            if ($maxItems >= 0 && $maxItems <= $pos && $minimumDepthReached) {
                                 $stub->cut = \count($a);
                                 $a = null;
                             }
@@ -170,14 +171,14 @@ class VarCloner extends AbstractCloner
                             $resRefs[$h] = $stub;
                         } else {
                             $stub = $resRefs[$h];
-                            ++$stub->refCount;
+                            $stub->refCount++;
                             $a = null;
                         }
                         break;
                 }
 
                 if ($a) {
-                    if (!$minimumDepthReached || 0 > $maxItems) {
+                    if (! $minimumDepthReached || $maxItems < 0) {
                         $queue[$len] = $a;
                         $stub->position = $len++;
                     } elseif ($pos < $maxItems) {
@@ -206,7 +207,7 @@ class VarCloner extends AbstractCloner
                     }
                 }
 
-                if (!$zvalRef) {
+                if (! $zvalRef) {
                     $vals[$k] = $stub;
                 } else {
                     $hardRefs[$zvalRef]->value = $stub;

@@ -32,7 +32,7 @@ class Router
 
             [$controller,$action] = $route->getAction();
             $controller = new $controller();
-
+            //если мы роут нашли , мы инжектим вьюшку и рекуест , чтобы в нашем контроллере мы могли обратиться к вьюшкам и данными с рекуеста , такими как $_POST FILES ...
             call_user_func([$controller, 'setView'], $this->view);
             call_user_func([$controller, 'setRequest'], $this->request);
             call_user_func([$controller, $action]);

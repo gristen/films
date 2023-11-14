@@ -24,10 +24,11 @@ class Container
 
     private function registerServices(): void
     {
-        $this->validator = new Validator();
+
         $this->request = Request::createFromGlobals();
         $this->view = new View;
         $this->router = new Router($this->view, $this->request);
+        $this->validator = new Validator();
         $this->request->setValidator($this->validator);
     }
 }

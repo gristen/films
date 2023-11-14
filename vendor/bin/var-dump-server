@@ -13,17 +13,19 @@
 namespace Composer;
 
 $GLOBALS['_composer_bin_dir'] = __DIR__;
-$GLOBALS['_composer_autoload_path'] = __DIR__ . '/..'.'/autoload.php';
+$GLOBALS['_composer_autoload_path'] = __DIR__.'/..'.'/autoload.php';
 
 if (PHP_VERSION_ID < 80000) {
-    if (!class_exists('Composer\BinProxyWrapper')) {
+    if (! class_exists('Composer\BinProxyWrapper')) {
         /**
          * @internal
          */
         final class BinProxyWrapper
         {
             private $handle;
+
             private $position;
+
             private $realpath;
 
             public function stream_open($path, $mode, $options, &$opened_path)
@@ -68,8 +70,9 @@ if (PHP_VERSION_ID < 80000) {
 
             public function stream_seek($offset, $whence)
             {
-                if (0 === fseek($this->handle, $offset, $whence)) {
+                if (fseek($this->handle, $offset, $whence) === 0) {
                     $this->position = ftell($this->handle);
+
                     return true;
                 }
 
@@ -88,7 +91,7 @@ if (PHP_VERSION_ID < 80000) {
 
             public function stream_stat()
             {
-                return array();
+                return [];
             }
 
             public function stream_set_option($option, $arg1, $arg2)
@@ -112,8 +115,8 @@ if (PHP_VERSION_ID < 80000) {
         (function_exists('stream_get_wrappers') && in_array('phpvfscomposer', stream_get_wrappers(), true))
         || (function_exists('stream_wrapper_register') && stream_wrapper_register('phpvfscomposer', 'Composer\BinProxyWrapper'))
     ) {
-        return include("phpvfscomposer://" . __DIR__ . '/..'.'/symfony/var-dumper/Resources/bin/var-dump-server');
+        return include 'phpvfscomposer://'.__DIR__.'/..'.'/symfony/var-dumper/Resources/bin/var-dump-server';
     }
 }
 
-return include __DIR__ . '/..'.'/symfony/var-dumper/Resources/bin/var-dump-server';
+return include __DIR__.'/..'.'/symfony/var-dumper/Resources/bin/var-dump-server';

@@ -40,7 +40,7 @@ class SymfonyCaster
 
         foreach (self::REQUEST_GETTERS as $prop => $getter) {
             $key = Caster::PREFIX_PROTECTED.$prop;
-            if (\array_key_exists($key, $a) && null === $a[$key]) {
+            if (\array_key_exists($key, $a) && $a[$key] === null) {
                 $clone ??= clone $request;
                 $a[Caster::PREFIX_VIRTUAL.$prop] = $clone->{$getter}();
             }
@@ -82,7 +82,7 @@ class SymfonyCaster
      */
     public static function castLazyObjectState($state, array $a, Stub $stub, bool $isNested)
     {
-        if (!$isNested) {
+        if (! $isNested) {
             return $a;
         }
 
@@ -99,7 +99,7 @@ class SymfonyCaster
 
         if ($instance) {
             $a['realInstance'] = $instance;
-            --$stub->cut;
+            $stub->cut--;
         }
 
         return $a;

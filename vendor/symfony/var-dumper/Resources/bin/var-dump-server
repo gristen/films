@@ -35,15 +35,15 @@ function includeIfExists(string $file): bool
 }
 
 if (
-    !includeIfExists(__DIR__ . '/../../../../autoload.php') &&
-    !includeIfExists(__DIR__ . '/../../vendor/autoload.php') &&
-    !includeIfExists(__DIR__ . '/../../../../../../vendor/autoload.php')
+    ! includeIfExists(__DIR__.'/../../../../autoload.php') &&
+    ! includeIfExists(__DIR__.'/../../vendor/autoload.php') &&
+    ! includeIfExists(__DIR__.'/../../../../../../vendor/autoload.php')
 ) {
     fwrite(STDERR, 'Install dependencies using Composer.'.PHP_EOL);
     exit(1);
 }
 
-if (!class_exists(Application::class)) {
+if (! class_exists(Application::class)) {
     fwrite(STDERR, 'You need the "symfony/console" component in order to run the VarDumper server.'.PHP_EOL);
     exit(1);
 }
@@ -63,5 +63,4 @@ $app->getDefinition()->addOption(
 $app->add($command = new ServerDumpCommand(new DumpServer($host, $logger)))
     ->getApplication()
     ->setDefaultCommand($command->getName(), true)
-    ->run($input, $output)
-;
+    ->run($input, $output);

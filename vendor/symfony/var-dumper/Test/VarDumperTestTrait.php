@@ -66,7 +66,7 @@ trait VarDumperTestTrait
         $dumper = new CliDumper(null, null, $flags);
         $dumper->setColors(false);
         $data = $cloner->cloneVar($data, $filter)->withRefHandles(false);
-        if (null !== $key && null === $data = $data->seek($key)) {
+        if ($key !== null && null === $data = $data->seek($key)) {
             return null;
         }
 
@@ -75,7 +75,7 @@ trait VarDumperTestTrait
 
     private function prepareExpectation(mixed $expected, int $filter): string
     {
-        if (!\is_string($expected)) {
+        if (! \is_string($expected)) {
             $expected = $this->getDump($expected, null, $filter);
         }
 

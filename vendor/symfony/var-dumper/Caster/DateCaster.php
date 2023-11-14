@@ -35,8 +35,7 @@ class DateCaster
 
         $title = $d->format('l, F j, Y')
             ."\n".self::formatInterval($fromNow).' from now'
-            .($location ? ($d->format('I') ? "\nDST On" : "\nDST Off") : '')
-        ;
+            .($location ? ($d->format('I') ? "\nDST On" : "\nDST Off") : '');
 
         unset(
             $a[Caster::PREFIX_DYNAMIC.'date'],
@@ -68,16 +67,16 @@ class DateCaster
     {
         $format = '%R ';
 
-        if (0 === $i->y && 0 === $i->m && ($i->h >= 24 || $i->i >= 60 || $i->s >= 60)) {
+        if ($i->y === 0 && $i->m === 0 && ($i->h >= 24 || $i->i >= 60 || $i->s >= 60)) {
             $d = new \DateTimeImmutable('@0', new \DateTimeZone('UTC'));
             $i = $d->diff($d->add($i)); // recalculate carry over points
-            $format .= 0 < $i->days ? '%ad ' : '';
+            $format .= $i->days > 0 ? '%ad ' : '';
         } else {
             $format .= ($i->y ? '%yy ' : '').($i->m ? '%mm ' : '').($i->d ? '%dd ' : '');
         }
 
         $format .= $i->h || $i->i || $i->s || $i->f ? '%H:%I:'.self::formatSeconds($i->s, substr($i->f, 2)) : '';
-        $format = '%R ' === $format ? '0s' : $format;
+        $format = $format === '%R ' ? '0s' : $format;
 
         return $i->format(rtrim($format));
     }
@@ -103,7 +102,7 @@ class DateCaster
     {
         $dates = [];
         foreach (clone $p as $i => $d) {
-            if (self::PERIOD_LIMIT === $i) {
+            if ($i === self::PERIOD_LIMIT) {
                 $now = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
                 $dates[] = sprintf('%s more', ($end = $p->getEndDate())
                     ? ceil(($end->format('U.u') - $d->format('U.u')) / ((int) $now->add($p->getDateInterval())->format('U.u') - (int) $now->format('U.u')))
