@@ -24,8 +24,13 @@ class MovieController extends Controller
                 'name' => ['required', 'min:3', 'max:255'],
             ]
         );
-        if (! $validation) {
 
+        if (! $validation) {
+            foreach ($this->request()->errors() as $field => $error) {
+
+                $this->session()->set($field, $error);
+            }
+            $this->redirect('/admin/movies/add');
         }
 
     }

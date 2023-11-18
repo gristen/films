@@ -2,7 +2,7 @@
 
 namespace App\Kernel\Validator;
 
-class Validator
+class Validator implements ValidatorInterface
 {
     private array $errors = [];
 
@@ -25,7 +25,9 @@ class Validator
                 $error = $this->validateRule($key, $ruleName, $ruleValue);
 
                 if ($error) {
+
                     $this->errors[$key][] = $error;
+
                 }
             }
         }

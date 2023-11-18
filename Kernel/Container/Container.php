@@ -2,20 +2,32 @@
 
 namespace App\Kernel\Container;
 
+use App\Kernel\HTTP\Redirect;
+use App\Kernel\HTTP\RedirectInterface;
 use App\Kernel\HTTP\Request;
+use App\Kernel\HTTP\RequestInterface;
 use App\Kernel\Router\Router;
+use App\Kernel\Router\RouterInterface;
+use App\Kernel\Session\Session;
+use App\Kernel\Session\SessionInterface;
 use App\Kernel\Validator\Validator;
+use App\Kernel\Validator\ValidatorInterface;
 use App\Kernel\View\View;
+use App\Kernel\View\ViewInterface;
 
 class Container
 {
-    public readonly Request $request;
+    public readonly RequestInterface $request;
 
-    public readonly Router $router;
+    public readonly RouterInterface $router;
 
-    public readonly View $view;
+    public readonly ViewInterface $view;
 
-    public readonly Validator $validator;
+    public readonly ValidatorInterface $validator;
+
+    public readonly RedirectInterface $redirect;
+
+    public readonly SessionInterface $session;
 
     public function __construct()
     {
@@ -26,9 +38,13 @@ class Container
     {
 
         $this->request = Request::createFromGlobals();
-        $this->view = new View;
-        $this->router = new Router($this->view, $this->request);
+        $this->session = new Session();
+        $this->view = new View($this->session);
         $this->validator = new Validator();
         $this->request->setValidator($this->validator);
+        $this->redirect = new Redirect();
+
+        $this->router = new Router($this->view, $this->request, $this->redirect, $this->session);
+
     }
 }

@@ -2,10 +2,13 @@
 
 namespace App\Kernel\Router;
 
-use App\Kernel\HTTP\Request;
-use App\Kernel\View\View;
+use App\Kernel\Controller\Controller;
+use App\Kernel\HTTP\RedirectInterface;
+use App\Kernel\HTTP\RequestInterface;
+use App\Kernel\Session\SessionInterface;
+use App\Kernel\View\ViewInterface;
 
-class Router
+class Router implements RouterInterface
 {
     private array $routes = [
         'GET' => [],
@@ -13,8 +16,10 @@ class Router
     ];
 
     public function __construct(
-        private View $view,
-        private Request $request
+        private ViewInterface $view,
+        private RequestInterface $request,
+        private RedirectInterface $redirect,
+        private SessionInterface $session,
     ) {
         $this->initRoutes();
     }
@@ -31,10 +36,13 @@ class Router
         if (is_array($route->getAction())) {
 
             [$controller,$action] = $route->getAction();
+            /*** @var Controller $controller*/
             $controller = new $controller();
             //если мы роут нашли , мы инжектим вьюшку и рекуест , чтобы в нашем контроллере мы могли обратиться к вьюшкам и данными с рекуеста , такими как $_POST FILES ...
             call_user_func([$controller, 'setView'], $this->view);
             call_user_func([$controller, 'setRequest'], $this->request);
+            call_user_func([$controller, 'setRedirect'], $this->redirect);
+            call_user_func([$controller, 'setSession'], $this->session);
             call_user_func([$controller, $action]);
 
             // $controller->$action();
