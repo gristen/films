@@ -2,6 +2,10 @@
 
 namespace App\Kernel\Container;
 
+use App\Kernel\Config\Config;
+use App\Kernel\Config\ConfigInterface;
+use App\Kernel\Database\Database;
+use App\Kernel\Database\DatabaseInterface;
 use App\Kernel\HTTP\Redirect;
 use App\Kernel\HTTP\RedirectInterface;
 use App\Kernel\HTTP\Request;
@@ -21,6 +25,10 @@ class Container
 
     public readonly RouterInterface $router;
 
+    public readonly ConfigInterface $config;
+
+    public readonly DatabaseInterface $database;
+
     public readonly ViewInterface $view;
 
     public readonly ValidatorInterface $validator;
@@ -39,6 +47,8 @@ class Container
 
         $this->request = Request::createFromGlobals();
         $this->session = new Session();
+        $this->config = new Config();
+        $this->database = new Database($this->config);
         $this->view = new View($this->session);
         $this->validator = new Validator();
         $this->request->setValidator($this->validator);
