@@ -54,7 +54,7 @@ class Container
         $this->request->setValidator($this->validator);
         $this->redirect = new Redirect();
 
-        $this->router = new Router($this->view, $this->request, $this->redirect, $this->session);
+        $this->router = new Router($this->view, $this->request, $this->redirect, $this->session, $this->database);
 
     }
 }
