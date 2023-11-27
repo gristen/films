@@ -37,7 +37,7 @@ class Router implements RouterInterface
 
         if (is_array($route->getAction())) {
 
-            [$controller,$action] = $route->getAction();
+            [$controller,$action] = $route->getAction(); //action - класс контроллера и сам метод
             /*** @var Controller $controller*/
             $controller = new $controller();
             //если мы роут нашли , мы инжектим вьюшку и рекуест , чтобы в нашем контроллере мы могли обратиться к вьюшкам и данными с рекуеста , такими как $_POST FILES ...
