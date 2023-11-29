@@ -1,3 +1,9 @@
+
+<?php
+/**
+ * @var \App\Kernel\View\ViewInterface $view
+ */
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -11,3 +17,4 @@
     <title>homePage</title>
 </head>
 <body>
+<?php $view->components('header'); ?>

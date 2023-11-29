@@ -10,4 +10,21 @@ class LoginController extends Controller
     {
         $this->view('login');
     }
+
+    public function login()
+    {
+        $email = $this->request()->input('email');
+        $password = $this->request()->input('password');
+
+        $this->auth()->attempt($email, $password);
+
+        $this->redirect('/home');
+    }
+
+    public function logout()
+    {
+        $this->auth()->logout();
+
+        return $this->redirect('/login');
+    }
 }
