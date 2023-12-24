@@ -2,6 +2,7 @@
 
 namespace App\Kernel\HTTP;
 
+use App\Kernel\upload\UploadedInterface;
 use App\Kernel\Validator\ValidatorInterface;
 
 interface RequestInterface
@@ -13,6 +14,8 @@ interface RequestInterface
     public function method(): string;
 
     public function input(string $key, $default = null);
+
+    public function file(string $key): ?UploadedInterface;
 
     public function setValidator(ValidatorInterface $validator): void;
 
