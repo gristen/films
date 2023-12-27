@@ -10,15 +10,11 @@ class App
 
     public function __construct()
     {
-
         $this->container = new Container();
-
     }
 
-    public function run(): void
+    public function run()
     {
-
-        $this->container->router->dispatch($this->container->request->uri(), $this->container->request->method());
-
+        $this->container->router->dispatch($this);
     }
 }
