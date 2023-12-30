@@ -1,5 +1,7 @@
 <?php
 
+use App\Controllers\AdminController;
+use App\Controllers\CategoriesController;
 use App\Controllers\HomeController;
 use App\Controllers\LoginController;
 use App\Controllers\RegisterController;
@@ -15,6 +17,8 @@ return [
     Route::post('/login', [LoginController::class, 'login']),
     Route::post('/register', [RegisterController::class, 'register']),
     Route::get('/logout', [LoginController::class, 'logout']),
-    Route::get('/admin', [LoginController::class, 'logout']),
+    Route::get('/admin', [AdminController::class, 'index']),
+    Route::get('/admin/categories/add', [CategoriesController::class, 'create']),
+    Route::post('/admin/categories/destroy', [CategoriesController::class, 'destroy']),
 
 ];

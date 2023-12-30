@@ -68,4 +68,30 @@ class Database implements DatabaseInterface
 
         return $result ?: null;
     }
+
+    public function get(string $table, array $conditions = [])
+    {
+        $where = '';
+        if (count($conditions) > 0) {
+            $where = 'WHERE .'.implode(' AND ', array_map(fn ($field) => "$field = :$field", array_keys($conditions)));
+
+        }
+        $sql = "SELECT * FROM $table $where";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($conditions);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function delete(string $table, array $conditions = [])
+    {
+        $where = '';
+        if (count($conditions) > 0) {
+            $where = 'WHERE .'.implode(' AND ', array_map(fn ($field) => "$field = :$field", array_keys($conditions)));
+
+        }
+        $sql = "DELETE FROM $table $where";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($conditions);
+    }
 }
