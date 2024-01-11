@@ -33,7 +33,6 @@ class MovieController extends Controller
                 $this->session()->set($field, $error);
             }
 
-            $this->redirect();
         }
         $id = $this->db()->insert('movies', [
             'name' => $this->request()->input('name'), // name название коллонки в БД

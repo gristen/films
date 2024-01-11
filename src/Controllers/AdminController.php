@@ -7,7 +7,7 @@ use App\Services\CategoryService;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function index(): void
     {
         $categories = new CategoryService($this->db());
 

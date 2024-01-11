@@ -85,12 +85,15 @@ class Database implements DatabaseInterface
 
     public function delete(string $table, array $conditions = [])
     {
+
         $where = '';
         if (count($conditions) > 0) {
-            $where = 'WHERE .'.implode(' AND ', array_map(fn ($field) => "$field = :$field", array_keys($conditions)));
+            $where = 'WHERE '.implode(' AND ', array_map(fn ($field) => "$field = :$field", array_keys($conditions)));
 
         }
+
         $sql = "DELETE FROM $table $where";
+
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($conditions);
     }

@@ -67,8 +67,6 @@ class Router implements RouterInterface
 
             // $controller->$action();
 
-        } else {
-            $route->getAction()();
         }
 
     }
