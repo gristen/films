@@ -34,6 +34,7 @@ class Database implements DatabaseInterface
 
     public function insert(string $table, array $data): int|false
     {
+
         $fields = array_keys($data);
         $columns = implode(', ', $fields);
         $binds = implode(', ', array_map(fn ($fields) => ":$fields", $fields));
@@ -45,7 +46,7 @@ class Database implements DatabaseInterface
         try {
             $stmt->execute($data);
         } catch (\PDOException $e) {
-            return false;
+
         }
 
         return (int) $this->pdo->lastInsertId();
@@ -96,5 +97,27 @@ class Database implements DatabaseInterface
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($conditions);
+    }
+
+    public function update(string $table, array $data, array $conditions): void
+    {
+        $fields = array_keys($data);
+        $set = implode(', ', array_map(fn ($field) => "$field = :$field", $fields));
+        $where = '';
+        if (count($conditions) > 0) {
+            $where = 'WHERE '.implode(' AND ', array_map(fn ($field) => "$field = :$field", array_keys($conditions)));
+
+        }
+
+        // data - поле которое мы меняем ,  т.е ['name' => " test name "] а $conditions - условие , т.е id записи ['id'] => 1 по итогу
+        // по итогу нам нужно смержить два массива в один
+        //        array:2 [▼
+        //  "name" => "Комедия2"
+        //  "id" => 4
+        //]
+
+        $sql = "UPDATE $table SET $set $where";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(array_merge($data, $conditions));
     }
 }

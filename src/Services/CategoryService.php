@@ -53,4 +53,9 @@ class CategoryService
         );
 
     }
+
+    public function update(int $id, string $name): void
+    {
+        $this->db->update('categories', ['name' => $name], ['id' => $id]); //таблица,какое поле мы меняем и дальше условие
+    }
 }

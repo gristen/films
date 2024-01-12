@@ -3,12 +3,18 @@
 namespace App\Controllers;
 
 use App\Kernel\Controller\Controller;
+use App\Services\CategoryService;
+use App\Services\MoviesService;
 
 class MovieController extends Controller
 {
-    public function index(): void
+    private MoviesService $service;
+
+    public function create(): void
     {
-        $this->view('movies');
+        $categories = new CategoryService($this->db());
+
+        $this->view('admin/movies/add', ['categories' => $categories->all()]);
     }
 
     public function add(): void
@@ -16,11 +22,9 @@ class MovieController extends Controller
         $this->view('admin/movies/add');
     }
 
-    public function store()
+    public function store(): void
     {
-        $file = $this->request()->file('image');
-        $filePath = $file->move('tset');
-        $this->storage()->url($filePath);
+
         $validation = $this->request()->validate(
             [
                 'name' => ['required', 'min:3', 'max:255'],
@@ -34,10 +38,22 @@ class MovieController extends Controller
             }
 
         }
-        $id = $this->db()->insert('movies', [
-            'name' => $this->request()->input('name'), // name название коллонки в БД
 
-        ]);
+        $this->service()->store(
+            $this->request()->input('name'),
+            $this->request()->input('description'),
+            $this->request()->file('image'),
+            intval($this->request()->input('category')),
+        );
+        $this->redirect('/admin');
+    }
 
+    public function service(): MoviesService
+    {
+        if (! isset($this->service)) {
+            $this->service = new MoviesService($this->db());
+        }
+
+        return $this->service;
     }
 }

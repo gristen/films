@@ -12,6 +12,29 @@ class CategoriesController extends Controller
         $this->view('admin/categories/add');
     }
 
+    public function update()
+    {
+
+        $validation = $this->request()->validate([
+            'name' => ['required'],
+        ]);
+        if (! $validation) {
+            foreach ($this->request()->errors() as $field => $errors) {
+                $this->session()->set($field, $errors);
+            }
+
+            $this->redirect("/admin/categories/update?id={$this->request()->input('id')}");
+        }
+
+        $service = new CategoryService($this->db());
+        $service->update(
+            $this->request()->input('id'),
+            $this->request()->input('name'),
+        );
+
+        $this->redirect('/admin');
+    }
+
     public function edit(): void
     {
         $service = new CategoryService($this->db());
@@ -21,14 +44,14 @@ class CategoriesController extends Controller
         $this->view('admin/categories/update', ['category' => $category]);
     }
 
-    public function destroy()
+    public function destroy(): void
     {
         $service = new CategoryService($this->db());
         $service->delete($this->request()->input('id'));
         $this->redirect('/admin');
     }
 
-    public function store()
+    public function store(): void
     {
         $service = new CategoryService($this->db());
         $validation = $this->request()->validate([
