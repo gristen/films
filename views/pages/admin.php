@@ -1,7 +1,9 @@
 <?php
 /**
  * @var \App\Kernel\View\ViewInterface $view
+ * @var \App\Kernel\Storage\StorageInterface $storage
  * @var array<\App\Models\Category> $catigories
+ * @var array<\App\Models\Movie> $movies
  */
 ?>
 <?php $view->components('start'); ?>
@@ -28,11 +30,12 @@
             </tr>
             </thead>
             <tbody>
+            <?php foreach ($movies as $movie) { ?>
             <tr>
                 <td style="width: 200px;">
-                    <img width="50" src="https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/21324634-7afd-4443-8ac4-5c4097ac5b6c/600x900" alt="">
+                    <img width="50" src="<?php echo $storage->url($movie->getPreview())?>" alt="<?php echo $movie->getName()?>">
                 </td>
-                <td style="width: 200px;">Пацаны</td>
+                <td style="width: 200px;"><?php echo $movie->getName() ?></td>
                 <td><span class="badge bg-warning warn__badge">7.9</span></td>
                 <td>
                     <div class="dropdown d-flex justify-content-end">
@@ -49,7 +52,8 @@
                                 </a>
                             </li>
                             <li>
-                               
+                                <form action="/admin/movies/destroy" method="post">
+                                    <input type="hidden" name="id" value="<?php echo $movie->getId() ?>">
                                     <button class="dropdown-item" href="#">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
@@ -57,12 +61,13 @@
                                         </svg>
                                         <span>Удалить</span>
                                     </button>
-                           
+                                </form>
                             </li>
                         </ul>
                     </div>
                 </td>
             </tr>
+    <?php } ?>
             </tbody>
         </table>
 

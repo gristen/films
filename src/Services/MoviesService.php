@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Kernel\Database\DatabaseInterface;
 use App\Kernel\upload\UploadedInterface;
+use App\Models\Movie;
 
 class MoviesService
 {
@@ -24,5 +25,25 @@ class MoviesService
             'category_id' => $category,
         ]);
 
+    }
+
+    public function all(): array
+    {
+        $movies = $this->db->get('movies');
+
+        return array_map(function ($movie) {
+            return new Movie(
+                $movie['id'],
+                $movie['name'],
+                $movie['description'],
+                $movie['preview'],
+                $movie['category_id'],
+            );
+        }, $movies);
+    }
+
+    public function destroy(int $id): void
+    {
+        $this->db->delete('movies', ['id' => $id]);
     }
 }
