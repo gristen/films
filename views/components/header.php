@@ -8,7 +8,7 @@
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none logo">
-                <h5 class="m-0">Кинопоиск <span class="badge bg-warning warn__badge">Lite</span></h5>
+                <h5 class="m-0">КиноБульвар </h5>
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -43,7 +43,7 @@
             </ul>
             <div class="d-flex align-items-center text-end">
             <?php if ($auth->check()) {   ?>
-                <a href="/logout">
+                <a class="btn btn-danger" href="/logout">
                     logout
                 </a>
 

@@ -16,6 +16,7 @@ class Auth implements AuthInterface
     ) {
     }
 
+    //login
     public function attempt(string $email, string $password): bool
     {
         $user = $this->database->first($this->table(), [
@@ -82,5 +83,10 @@ class Auth implements AuthInterface
     public function sessionField(): string
     {
         return $this->config->get('auth.session_field');
+    }
+
+    public function id(): int
+    {
+        return $this->session->get($this->sessionField());
     }
 }

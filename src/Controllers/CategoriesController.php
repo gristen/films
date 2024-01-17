@@ -12,7 +12,7 @@ class CategoriesController extends Controller
         $this->view('admin/categories/add');
     }
 
-    public function update()
+    public function update(): void
     {
 
         $validation = $this->request()->validate([

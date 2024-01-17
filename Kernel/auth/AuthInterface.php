@@ -12,6 +12,8 @@ interface AuthInterface
 
     public function user(): ?User; //либо нулл либо массив
 
+    public function id(): int;
+
     public function table(): string;
 
     public function email(): string;

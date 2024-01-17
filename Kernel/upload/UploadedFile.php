@@ -8,7 +8,7 @@ class UploadedFile implements UploadedInterface
         public readonly string $name,
         public readonly string $type,
         public readonly string $tmpName,
-        public readonly string $error,
+        public readonly int $error,
         public readonly string $size,
     ) {
 
@@ -40,5 +40,10 @@ class UploadedFile implements UploadedInterface
     public function getExtension(): string
     {
         return pathinfo($this->name, PATHINFO_EXTENSION); // разширение файла получаем
+    }
+
+    public function hasErrors(): bool
+    {
+        return $this->error != UPLOAD_ERR_OK;
     }
 }

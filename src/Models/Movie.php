@@ -10,7 +10,14 @@ class Movie
         private string $description,
         private string $preview,
         private int $categoryId,
+        private string $createdAt,
+        private array $reviews = [],
     ) {
+    }
+
+    public function getCreatedAt(): string
+    {
+        return $this->createdAt;
     }
 
     public function getId(): int
@@ -36,5 +43,10 @@ class Movie
     public function getCategoryId(): int
     {
         return $this->categoryId;
+    }
+
+    public function getReviews(): array
+    {
+        return $this->reviews;
     }
 }

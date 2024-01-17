@@ -17,6 +17,7 @@ class Validator implements ValidatorInterface
             $rules = $rule;
 
             foreach ($rules as $rule) {
+
                 $rule = explode(':', $rule);
 
                 $ruleName = $rule[0];
@@ -40,15 +41,18 @@ class Validator implements ValidatorInterface
 
     private function validateRule(string $key, string $ruleName, string $ruleValue = null): string|false
     {
+
         $value = $this->data[$key];
 
         switch ($ruleName) {
             case 'required':
                 if (empty($value)) {
+
                     return "Field $key is required";
                 }
                 break;
             case 'min':
+
                 if (strlen($value) < $ruleValue) {
                     return "Field $key must be at least $ruleValue characters long";
                 }

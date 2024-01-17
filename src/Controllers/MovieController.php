@@ -36,7 +36,7 @@ class MovieController extends Controller
 
                 $this->session()->set($field, $error);
             }
-
+            $this->redirect("movie?id={$this->request()->input('id')}");
         }
 
         $this->service()->store(
@@ -48,11 +48,39 @@ class MovieController extends Controller
         $this->redirect('/admin');
     }
 
+    public function edit(): void
+    {
+        $categories = new CategoryService($this->db());
+        $this->view('admin/movies/update', [
+            'movie' => $this->service()->find($this->request()->input('id')),
+            'categories' => $categories->all(),
+
+        ]);
+    }
+
+    public function update(): void
+    {
+
+        $this->service()->update(
+            $this->request()->input('id'),
+            $this->request()->input('name'),
+            $this->request()->input('description'),
+            $this->request()->file('image'),
+            $this->request()->input('category'),
+        );
+        $this->redirect('/admin');
+    }
+
     public function destroy(): void
     {
         $this->service()->destroy($this->request()->input('id'));
 
         $this->redirect('/admin');
+    }
+
+    public function show(): void
+    {
+        $this->view('movie', ['movie' => $this->service()->find($this->request()->input('id'))]);
     }
 
     public function service(): MoviesService
