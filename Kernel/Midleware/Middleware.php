@@ -2,9 +2,9 @@
 
 namespace App\Kernel\Midleware;
 
-class Middleware implements MidlewareInterface
+class Middleware implements MiddlewareInterface
 {
-    public function check(array $middlewares = [])
+    public function check(array $middlewares = []): void
     {
         // TODO: Implement check() method.
     }

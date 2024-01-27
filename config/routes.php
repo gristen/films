@@ -8,14 +8,15 @@ use App\Controllers\MovieController;
 use App\Controllers\RegisterController;
 use App\Controllers\ReviewController;
 use App\Kernel\Router\Route;
+use App\Middleware\GuestMiddleware;
 
 return [
 
     Route::get('/home', [HomeController::class, 'index']),
     Route::get('/', [HomeController::class, 'index']),
 
-    Route::get('/register', [RegisterController::class, 'index']),
-    Route::get('/login', [LoginController::class, 'index']),
+    Route::get('/register', [RegisterController::class, 'index'], [GuestMiddleware::class]),
+    Route::get('/login', [LoginController::class, 'index'], [GuestMiddleware::class]),
     Route::post('/login', [LoginController::class, 'login']),
     Route::post('/register', [RegisterController::class, 'register']),
     Route::get('/logout', [LoginController::class, 'logout']),

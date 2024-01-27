@@ -49,4 +49,14 @@ class Movie
     {
         return $this->reviews;
     }
+
+    public function avgRating(): float
+    {
+
+        $rating = array_map(function (Review $review) {
+            return $review->getRating();
+        }, $this->reviews);
+
+        return round(array_sum($rating) / count($rating), 1);
+    }
 }

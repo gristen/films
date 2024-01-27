@@ -4,7 +4,7 @@ namespace App\Middleware;
 
 use App\Kernel\Midleware\AbstractMiddleware;
 
-class AuthMiddlewaire extends AbstractMiddleware
+class AuthMiddleware extends AbstractMiddleware
 {
     public function handle(): void
     {
