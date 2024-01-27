@@ -58,10 +58,24 @@ class Auth implements AuthInterface
             'id' => $this->session->get($this->sessionField()),
         ]);
         if ($user) {
-            return new User($user['id'], $user[$this->email()], $user[$this->password()]);
+
+            return new User($user['id'], $user['name'], $user[$this->email()], $user[$this->password()]);
         }
 
         return null;
+    }
+
+    public function isAdmin(): bool
+    {
+        $user = $this->database->first('users', [
+            'id' => $this->session->get($this->sessionField()),
+        ]);
+
+        if ($user['is_admin'] === 1) {
+            return true;
+        }
+
+        return false;
     }
 
     //поля для бд

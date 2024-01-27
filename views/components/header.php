@@ -2,6 +2,7 @@
 /**
  * @var \App\Kernel\auth\AuthInterface $auth
  */
+$user = $auth->user();
 ?>
 
 <header class="p-3 text-bg-dark">
@@ -41,13 +42,16 @@
                     </a>
                 </li>
             </ul>
-            <div class="d-flex align-items-center text-end">
+            <div class="d-flex  align-items-center text-end">
+               
             <?php if ($auth->check()) {   ?>
+                <a  class="username" href=""><?php echo $user->getName()?></a>
                 <a class="btn btn-danger" href="/logout">
                     logout
                 </a>
 
             <?php } else {?>
+
 
                 <a href="/login"  class="btn btn-outline-light me-2 d-flex align-items-center column-gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">

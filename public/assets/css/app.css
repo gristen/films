@@ -9,7 +9,12 @@ body {
 .warn__badge {
     color: #2b3035;
 }
-
+.username{
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    margin-right: 14%;
+}
 .movies {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

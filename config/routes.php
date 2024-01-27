@@ -8,6 +8,7 @@ use App\Controllers\MovieController;
 use App\Controllers\RegisterController;
 use App\Controllers\ReviewController;
 use App\Kernel\Router\Route;
+use App\Middleware\AdminMiddleware;
 use App\Middleware\GuestMiddleware;
 
 return [
@@ -20,18 +21,18 @@ return [
     Route::post('/login', [LoginController::class, 'login']),
     Route::post('/register', [RegisterController::class, 'register']),
     Route::get('/logout', [LoginController::class, 'logout']),
-    Route::get('/admin', [AdminController::class, 'index']),
+    Route::get('/admin', [AdminController::class, 'index'], [AdminMiddleware::class]),
     //category
-    Route::get('/admin/categories/add', [CategoriesController::class, 'create']),
+    Route::get('/admin/categories/add', [CategoriesController::class, 'create'], [AdminMiddleware::class]),
     Route::post('/admin/categories/add', [CategoriesController::class, 'store']),
     Route::post('/admin/categories/destroy', [CategoriesController::class, 'destroy']),
-    Route::get('/admin/categories/update', [CategoriesController::class, 'edit']),
+    Route::get('/admin/categories/update', [CategoriesController::class, 'edit'], [AdminMiddleware::class]),
     Route::post('/admin/categories/update', [CategoriesController::class, 'update']),
     //movies
-    Route::get('/admin/movies/add', [MovieController::class, 'create']),
+    Route::get('/admin/movies/add', [MovieController::class, 'create'], [AdminMiddleware::class]),
     Route::post('/admin/movies/add', [MovieController::class, 'store']),
     Route::post('/admin/movies/destroy', [MovieController::class, 'destroy']),
-    Route::get('/admin/movies/update', [MovieController::class, 'edit']),
+    Route::get('/admin/movies/update', [MovieController::class, 'edit'], [AdminMiddleware::class]),
     Route::post('/admin/movies/update', [MovieController::class, 'update']),
     Route::get('/movie', [MovieController::class, 'show']),
 

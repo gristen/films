@@ -10,7 +10,7 @@ interface AuthInterface
 
     public function check(): bool;
 
-    public function user(): ?User; //либо нулл либо массив
+    public function user(): ?User; //либо нулл либо модель юзера
 
     public function id(): int;
 
@@ -21,4 +21,6 @@ interface AuthInterface
     public function password(): string;
 
     public function sessionField(): string;
+
+    public function isAdmin(): bool;
 }
