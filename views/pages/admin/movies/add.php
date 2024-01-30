@@ -63,6 +63,12 @@
                                     name="image"
 
                             >
+                            <input
+                                    type="file"
+                                    class="form-control"
+                                    id="image"
+                                    name="film"
+                            >
                             <label class="form-label" for="formFile">Изображение</label>
                         </div>
                     </div>

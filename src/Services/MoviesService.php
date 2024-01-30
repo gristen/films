@@ -15,16 +15,18 @@ class MoviesService
 
     }
 
-    public function store(string $name, string $description, UploadedInterface $image, int $category): false|int
+    public function store(string $name, UploadedInterface $film, string $description, UploadedInterface $image, int $category): false|int
     {
 
-        $filePath = $image->move('movies'); // в какую папку созранится файл
+        $previewPath = $image->move('movies/preview'); // в какую папку созранится файл
+        $filmPath = $film->move('movies');
 
         //ключи должны совпадать с полями бд т.к бины создаются с ключей с массива
         return $this->db->insert('movies', [
             'name' => $name,
+            'film' => $filmPath,
             'description' => $description,
-            'preview' => $filePath,
+            'preview' => $previewPath,
             'category_id' => $category,
         ]);
 

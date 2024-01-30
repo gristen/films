@@ -25,22 +25,23 @@ class MovieController extends Controller
     public function store(): void
     {
 
-        $validation = $this->request()->validate(
-            [
-                'name' => ['required', 'min:3', 'max:255'],
-            ]
-        );
-
-        if (! $validation) {
-            foreach ($this->request()->errors() as $field => $error) {
-
-                $this->session()->set($field, $error);
-            }
-            $this->redirect("movie?id={$this->request()->input('id')}");
-        }
+        //        $validation = $this->request()->validate(
+        //            [
+        //                'name' => ['required', 'min:3', 'max:255'],
+        //            ]
+        //        );
+        //
+        //        if (! $validation) {
+        //            foreach ($this->request()->errors() as $field => $error) {
+        //
+        //                $this->session()->set($field, $error);
+        //            }
+        //            $this->redirect("movie?id={$this->request()->input('id')}");
+        //        }
 
         $this->service()->store(
             $this->request()->input('name'),
+            $this->request()->file('film'),
             $this->request()->input('description'),
             $this->request()->file('image'),
             intval($this->request()->input('category')),
