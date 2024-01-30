@@ -15,10 +15,32 @@
             <div class="one-movie">
                 <div class="card mb-3 mt-3 one-movie__item">
                     <div class="row g-3">
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <img src="<?php echo $storage->url($movie->getPreview()) ?>" class="img-fluid rounded one-movie__image" alt="<?php echo $movie->getName() ?>">
                             <?php if ($auth->check()) { ?>
-                                <form action="/reviews/add" method="post" class="m-3 w-100">
+
+                            <?php } else { ?>
+                                <div class="alert alert-warning m-3 w-100">
+                                    Для того, чтобы оставить отзыв, необходимо <a href="/login">авторизоваться</a>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <h1 class="card-title"><?php echo $movie->getName()?></h1>
+                                <p class="card-text">Оценка <span class="badge bg-warning warn__badge"><?php echo $movie->avgRating() ?></span></p>
+                                <p class="card-text"> <?php echo $movie->getDescription()?></p>
+                                <p class="card-text"><small class="text-body-secondary"><?php echo $movie->getCreatedAt()?></small></p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-5 mb-5">
+                            <video controls class="img-fluid rounded one-movie__image">
+                                <source src="<?php echo $storage->url($movie->getFilm()) ?>" type="video/mp4">
+                                Ваш браузер не поддерживает видео.
+                            </video>
+                        </div>
+                        <div class="col-md-5 d-flex justify-content-center m-auto mt-5 ">
+                                <form action="/reviews/add" method="post" class="m-3 w-100 form_review">
                                     <input type="hidden" value="<?php echo $movie->getId() ?>" name="id">
                                     <select
                                             class="form-select <?php echo $session->has('rating') ? 'is-invalid' : '' ?>"
@@ -59,19 +81,9 @@
                                     </div>
                                     <button class="btn btn-primary mt-2">Оставить отзыв</button>
                                 </form>
-                            <?php } else { ?>
-                                <div class="alert alert-warning m-3 w-100">
-                                    Для того, чтобы оставить отзыв, необходимо <a href="/login">авторизоваться</a>
-                                </div>
-                            <?php } ?>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h1 class="card-title"><?php echo $movie->getName()?>></h1>
-                                <p class="card-text">Оценка <span class="badge bg-warning warn__badge"><?php echo $movie->avgRating() ?></span></p>
-                                <p class="card-text"> <?php echo $movie->getDescription()?></p>
-                                <p class="card-text"><small class="text-body-secondary"><?php echo $movie->getCreatedAt()?></small></p>
                                 <h4>Отзывы</h4>
+
                                 <?php foreach ($movie->getReviews() as $review) { ?>
                                 <div class="one-movie__reviews">
                                     <div class="card">
@@ -88,7 +100,7 @@
                                     </div>
                                 </div>
                                 <?php } ?>
-                            </div>
+
                         </div>
                     </div>
                 </div>

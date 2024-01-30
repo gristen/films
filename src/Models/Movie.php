@@ -6,6 +6,7 @@ class Movie
 {
     public function __construct(
         private int $id,
+        private string $film,
         private string $name,
         private string $description,
         private string $preview,
@@ -63,5 +64,10 @@ class Movie
         } else {
             return 0.0;
         }
+    }
+
+    public function getFilm(): string
+    {
+        return $this->film;
     }
 }

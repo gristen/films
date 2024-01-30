@@ -39,6 +39,7 @@ class MoviesService
         return array_map(function ($movie) {
             return new Movie(
                 $movie['id'],
+                $movie['film'],
                 $movie['name'],
                 $movie['description'],
                 $movie['preview'],
@@ -65,6 +66,7 @@ class MoviesService
 
         return new Movie(
             $movie['id'],
+            $movie['film'],
             $movie['name'],
             $movie['description'],
             $movie['preview'],
@@ -128,6 +130,7 @@ class MoviesService
         return array_map(function ($movie) {
             return new Movie(
                 $movie['id'],
+                $movie['film'],
                 $movie['name'],
                 $movie['description'],
                 $movie['preview'],

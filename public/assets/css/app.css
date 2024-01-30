@@ -9,6 +9,9 @@ body {
 .warn__badge {
     color: #2b3035;
 }
+
+
+
 .username{
     color: white;
     font-size: 18px;
@@ -39,7 +42,13 @@ body {
 }
 
 .one-movie__image {
-    margin: 10px;
+
+    height: 500px;
+    width: 100%;
+}
+
+.form_review{
+    margin: 0 auto;
 }
 
 .one-movie__reviews {
