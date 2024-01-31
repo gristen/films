@@ -5,6 +5,7 @@ use App\Controllers\CategoriesController;
 use App\Controllers\HomeController;
 use App\Controllers\LoginController;
 use App\Controllers\MovieController;
+use App\Controllers\ProfileController;
 use App\Controllers\RegisterController;
 use App\Controllers\ReviewController;
 use App\Kernel\Router\Route;
@@ -39,4 +40,8 @@ return [
     //review
 
     Route::post('/reviews/add', [ReviewController::class, 'store']),
+
+    //
+
+    Route::get('/profile', [ProfileController::class, 'index']),
 ];

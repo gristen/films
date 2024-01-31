@@ -8,6 +8,8 @@ class User
         private int $id,
         private string $name,
         private string $email,
+        private string $create_at,
+        private int $is_admin,
         private string $password,
     ) {
 
@@ -31,5 +33,15 @@ class User
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getCreateAt(): string
+    {
+        return $this->create_at;
+    }
+
+    public function getIsAdmin(): int
+    {
+        return $this->is_admin;
     }
 }

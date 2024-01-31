@@ -45,7 +45,7 @@ $user = $auth->user();
             <div class="d-flex  align-items-center text-end">
                
             <?php if ($auth->check()) {   ?>
-                <a  class="username" href=""><?php echo $user->getName()?></a>
+                <a  class="username" href="/profile?id=<?php echo $user->getId()?>"><?php echo $user->getName()?></a>
                 <a class="btn btn-danger" href="/logout">
                     logout
                 </a>
