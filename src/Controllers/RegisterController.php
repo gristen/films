@@ -3,15 +3,18 @@
 namespace App\Controllers;
 
 use App\Kernel\Controller\Controller;
+use App\Services\UserService;
 
 class RegisterController extends Controller
 {
-    public function index()
+    private UserService $service;
+
+    public function index(): void
     {
         $this->view('register');
     }
 
-    public function register()
+    public function register(): void
     {
         $validation = $this->request()->validate([
             'name' => ['required', 'max:255'],
@@ -28,12 +31,28 @@ class RegisterController extends Controller
             $this->redirect('/register');
         }
 
-        $this->db()->insert('users', [
+        $this->service()->store(
+            $this->request()->input('name'),
+            $this->request()->input('email'),
+            $this->request()->file('avatar'),
+            password_hash($this->request()->input('password'), PASSWORD_DEFAULT),
+        );
+
+        /*$this->db()->insert('users', [
             'name' => $this->request()->input('name'),
             'email' => $this->request()->input('email'),
             'password' => password_hash($this->request()->input('password'), PASSWORD_DEFAULT),
-        ]);
+        ]);*/
 
         $this->redirect('/');
+    }
+
+    public function service(): UserService
+    {
+        if (! isset($this->service)) {
+            $this->service = new UserService($this->db());
+        }
+
+        return $this->service;
     }
 }

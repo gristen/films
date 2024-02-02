@@ -13,7 +13,7 @@
             <hr>
         </div>
         <div class="container d-flex justify-content-center">
-            <form action="/register" method="post" class="d-flex flex-column justify-content-center w-50 gap-2 mt-5 mb-5">
+            <form action="/register" enctype="multipart/form-data" method="post" class="d-flex flex-column justify-content-center w-50 gap-2 mt-5 mb-5">
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
@@ -49,6 +49,12 @@
                                     <?php echo $session->getFlash('email')[0] ?>
                                 </div>
                             <?php } ?>
+                            <input
+                                    type="file"
+                                    class="form-control mt-2"
+                                    id="image"
+                                    name="avatar"
+                            >
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ class User
         private string $email,
         private string $create_at,
         private int $is_admin,
+        private string $avatar,
         private string $password,
     ) {
 
@@ -43,5 +44,10 @@ class User
     public function getIsAdmin(): int
     {
         return $this->is_admin;
+    }
+
+    public function getAvatar(): string
+    {
+        return $this->avatar;
     }
 }

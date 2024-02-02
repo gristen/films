@@ -22,7 +22,7 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <!-- Дополнительная информация о пользователе или дополнительные действия -->
+                <img src="<?php echo $storage->url($user->getAvatar()) ?>" alt="">
             </div>
         </div>
     </div>

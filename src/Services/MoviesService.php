@@ -98,6 +98,7 @@ class MoviesService
                     $user['email'],
                     $user['create_at'],
                     $user['is_admin'],
+                    $user['avatar'],
                     $user['password'],
                 )
             );
