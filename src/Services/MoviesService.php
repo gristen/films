@@ -72,11 +72,11 @@ class MoviesService
             $movie['preview'],
             $movie['category_id'],
             $movie['create_at'],
-            $this->getReviews($movie['id']) // FIXME: в данном случае это лишнее
+            $this->getReviews($movie['id'])
         );
     }
 
-    private function getReviews(int $id): array
+    public function getReviews(int $id): array
     {
         $reviews = $this->db->get('reviews', [
             'movie_id' => $id,

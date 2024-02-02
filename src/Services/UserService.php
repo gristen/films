@@ -5,12 +5,15 @@ namespace App\Services;
 use App\Kernel\auth\User;
 use App\Kernel\Database\DatabaseInterface;
 use App\Kernel\upload\UploadedInterface;
+use App\Models\Movie;
 
 class UserService
 {
-    public function __construct(private readonly DatabaseInterface $db)
-    {
+    private MoviesService $moviesService;
 
+    public function __construct(private readonly DatabaseInterface $db, MoviesService $moviesService)
+    {
+        $this->moviesService = $moviesService;
     }
 
     public function find(int $id): User
@@ -40,5 +43,31 @@ class UserService
             'avatar' => $avatarPath,
 
         ]);
+    }
+
+    public function getFavoritesMovies(int $userId): array
+    {
+
+        $movieData = $this->db->get('favorites', ['user_id' => $userId]);
+        $movies = [];
+        foreach ($movieData as $data) {
+            $movies[] = $this->db->get('movies', ['id' => $data['film_id']]);
+        }
+
+        return array_map(function ($movie) {
+
+            return new Movie(
+
+                $movie[0]['id'],
+                $movie[0]['film'],
+                $movie[0]['name'],
+                $movie[0]['description'],
+                $movie[0]['preview'],
+                $movie[0]['category_id'],
+                $movie[0]['create_at'],
+                $this->moviesService->getReviews($movie[0]['id'])
+
+            );
+        }, $movies);
     }
 }

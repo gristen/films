@@ -8,6 +8,7 @@ use App\Controllers\MovieController;
 use App\Controllers\ProfileController;
 use App\Controllers\RegisterController;
 use App\Controllers\ReviewController;
+use App\Controllers\UserController;
 use App\Kernel\Router\Route;
 use App\Middleware\AdminMiddleware;
 use App\Middleware\GuestMiddleware;
@@ -44,4 +45,7 @@ return [
     //
 
     Route::get('/profile', [ProfileController::class, 'index']),
+
+    Route::get('/favorites', [UserController::class, 'favorites']),
+
 ];
