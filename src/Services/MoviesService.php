@@ -144,4 +144,14 @@ class MoviesService
         }, $movies);
 
     }
+
+    public function isMovieFavorited(int $userId, int $movieId): bool
+    {
+        $favorite = $this->db->first('favorites', [
+            'user_id' => $userId,
+            'film_id' => $movieId,
+        ]);
+
+        return ! empty($favorite);
+    }
 }

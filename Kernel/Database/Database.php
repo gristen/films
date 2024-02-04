@@ -15,6 +15,34 @@ class Database implements DatabaseInterface
         $this->conntect();
     }
 
+    public function join(string $table, array $joins, array $conditions = [], array $order = [], $limit = -1): array
+    {
+        $joinClauses = '';
+        foreach ($joins as $join) {
+            $joinClauses .= " {$join['type']} JOIN {$join['table']} ON {$join['on']}";
+        }
+
+        $where = '';
+        if (count($conditions) > 0) {
+            $where = 'WHERE '.implode(' AND ', array_map(fn ($field) => "$field = :$field", array_keys($conditions)));
+        }
+
+        $sql = "SELECT * FROM $table $joinClauses $where";
+
+        if (count($order) > 0) {
+            $sql .= ' ORDER BY '.implode(', ', array_map(fn ($field, $direction) => "$field $direction", array_keys($order), $order));
+        }
+
+        if ($limit > 0) {
+            $sql .= " LIMIT $limit";
+        }
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($conditions);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     private function conntect()
     {
         $driver = $this->config->get('database.driver');

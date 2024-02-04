@@ -7,8 +7,6 @@ use App\Services\UserService;
 
 class UserController extends Controller
 {
-    private UserService $userService;
-
     public function favorites(): void
     {
 
@@ -16,7 +14,7 @@ class UserController extends Controller
 
     }
 
-    public function index()
+    public function showFavorites(): void
     {
         $this->service()->getFavoritesMovies($this->auth()->id());
     }

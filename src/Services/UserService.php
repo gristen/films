@@ -9,11 +9,21 @@ use App\Models\Movie;
 
 class UserService
 {
-    private MoviesService $moviesService;
+    private ?MoviesService $moviesService;
 
-    public function __construct(private readonly DatabaseInterface $db, MoviesService $moviesService)
+    public function __construct(private readonly DatabaseInterface $db, MoviesService $moviesService = null)
     {
         $this->moviesService = $moviesService;
+    }
+
+    public function isMovieFavorited(int $userId, int $movieId): bool
+    {
+        $favorite = $this->db->first('favorites', [
+            'user_id' => $userId,
+            'film_id' => $movieId,
+        ]);
+
+        return ! empty($favorite);
     }
 
     public function find(int $id): User
@@ -65,7 +75,7 @@ class UserService
                 $movie[0]['preview'],
                 $movie[0]['category_id'],
                 $movie[0]['create_at'],
-                $this->moviesService->getReviews($movie[0]['id'])
+                //$this->moviesService->getReviews($movie[0]['id'])
 
             );
         }, $movies);

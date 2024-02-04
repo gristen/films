@@ -7,7 +7,7 @@ class Route
     public function __construct(
         private string $uri,
         private string $method,
-        private $action,
+        private array $action,
         private array $middlewares = [],
     ) {
     }
@@ -17,7 +17,7 @@ class Route
         return $this->method;
     }
 
-    public function getAction()
+    public function getAction(): array
     {
         return $this->action;
     }

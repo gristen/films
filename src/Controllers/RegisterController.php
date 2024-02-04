@@ -19,8 +19,8 @@ class RegisterController extends Controller
         $validation = $this->request()->validate([
             'name' => ['required', 'max:255'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'min:8'],
-            'password_confirmation' => ['required', 'min:8'],
+            'password' => ['required', 'min:3'],
+            'password_confirmation' => ['required', 'min:3'],
         ]);
 
         if (! $validation) {
@@ -37,12 +37,6 @@ class RegisterController extends Controller
             $this->request()->file('avatar'),
             password_hash($this->request()->input('password'), PASSWORD_DEFAULT),
         );
-
-        /*$this->db()->insert('users', [
-            'name' => $this->request()->input('name'),
-            'email' => $this->request()->input('email'),
-            'password' => password_hash($this->request()->input('password'), PASSWORD_DEFAULT),
-        ]);*/
 
         $this->redirect('/');
     }

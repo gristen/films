@@ -81,6 +81,14 @@ class MovieController extends Controller
 
     public function show(): void
     {
+
+        $movieId = $this->request()->input('id');
+        if ($this->auth()->check()) {
+            $userId = $this->auth()->id();
+            $isFavorited = $this->service()->isMovieFavorited($userId, $movieId);
+            $this->view('movie', ['movie' => $this->service()->find($this->request()->input('id')), 'isFavired' => $isFavorited]);
+        }
+
         $this->view('movie', ['movie' => $this->service()->find($this->request()->input('id'))]);
     }
 

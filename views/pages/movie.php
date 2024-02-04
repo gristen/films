@@ -17,19 +17,17 @@
                     <div class="row g-3">
                         <div class="col-md-5">
                             <img src="<?php echo $storage->url($movie->getPreview()) ?>" class="img-fluid rounded one-movie__image" alt="<?php echo $movie->getName() ?>">
-                            <?php if ($auth->check()) { ?>
+                            <?php if ($auth->check() && $isFavired === false) { ?>
                                 <button class="btn btn-warning favorite-button" id="btn_fa">
                                     В избранное
                                 </button>
                             <?php } else { ?>
-                                <div class="alert alert-warning m-3 w-100">
-                                    Для того, чтобы оставить отзыв, необходимо <a href="/login">авторизоваться</a>
-                                </div>
+
                             <?php } ?>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body d-flex flex-column">
-                                <input type="hidden" value="<?php echo $movie->getId() ?>">
+                                <input name="movie_id" type="hidden" value="<?php echo $movie->getId() ?>">
                                 <h1 class="card-title">Название: <?php echo $movie->getName()?></h1>
                                 <p class="card-text">Оценка: <span class="badge bg-warning warn__badge"><?php echo $movie->avgRating() ?></span></p>
                                 <p class="card-text">Описание: <?php echo $movie->getDescription()?></p>
