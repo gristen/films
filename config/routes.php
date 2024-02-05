@@ -47,5 +47,6 @@ return [
     Route::get('/profile', [ProfileController::class, 'index']),
 
     Route::get('/favorites', [UserController::class, 'favorites']),
+    Route::get('/favorites/destroy', [UserController::class, 'favoritesDestroy']),
 
 ];

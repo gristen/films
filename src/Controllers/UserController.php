@@ -14,6 +14,13 @@ class UserController extends Controller
 
     }
 
+    public function favoritesDestroy(): void
+    {
+        $this->db()->delete('favorites', ['user_id' => $this->request()->input('user_id'), 'film_id' => $this->request()->input('movie_id')]);
+        echo 'delete';
+
+    }
+
     public function showFavorites(): void
     {
         $this->service()->getFavoritesMovies($this->auth()->id());

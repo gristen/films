@@ -6,6 +6,7 @@
  * @var \App\Kernel\Storage\StorageInterface $storage
  * @var \App\Models\Movie $movie
  * @var \App\Models\Review $review
+ * @var bool $isFavired
  */
 ?>
 
@@ -15,15 +16,24 @@
             <div class="one-movie">
                 <div class="card mb-3 mt-3 one-movie__item">
                     <div class="row g-3">
-                        <div class="col-md-5">
+                        <div class="col-md-5 position-relative">
                             <img src="<?php echo $storage->url($movie->getPreview()) ?>" class="img-fluid rounded one-movie__image" alt="<?php echo $movie->getName() ?>">
-                            <?php if ($auth->check() && $isFavired === false) { ?>
-                                <button class="btn btn-warning favorite-button" id="btn_fa">
-                                    В избранное
-                                </button>
-                            <?php } else { ?>
+                            <?php if ($isFavired === true) {?>
+                            <a id="btn_del" class="star-pass position-absolute" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                            </a>
+                          <?php } else { ?>
 
+                                <a id="btn_add" class="star-pass position-absolute" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                    </svg>
+                                </a>
                             <?php } ?>
+
+                        
                         </div>
                         <div class="col-md-7">
                             <div class="card-body d-flex flex-column">
@@ -108,31 +118,67 @@
         </div>
     </main>
     <script>
-        $(document).ready(function (){
-       
+        $(document).ready(function () {
 
-            $('#btn_fa').on('click',function (event){
+            var starIcon = $(' <a id="btn_add" class="star-pass position-absolute" > <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"> <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/> </svg></a>');
+            var filledStarIcon = $('<a id="btn_del" class="star-pass position-absolute" > <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"> <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/> </svg> </a>');
+
+
+            $('body').on('click', '#btn_add', function (event) {
                 event.preventDefault();
-                let user_id = <?php echo $auth->id()?>;
+                var user_id = <?php echo $auth->id()?>;
                 var movie_id = $("input[name='id']").val();
+
+
+                var clonedStarIcon = starIcon.clone();
+                var clonedFilledStarIcon = filledStarIcon.clone();
+
+                clonedStarIcon.replaceWith(clonedFilledStarIcon);
+                $(this).replaceWith(clonedFilledStarIcon);
+                clonedFilledStarIcon.attr('id', 'btn_del');
 
                 $.ajax({
                     method: "GET",
                     url: "/favorites",
                     data: {
-                        user_id:user_id,
+                        user_id: user_id,
                         movie_id: movie_id,
                     }
                 })
-                    .done(function( msg ) {
-                        alert("complete")
-
+                    .done(function (msg) {
+                        console.log(msg);
                     });
-            })
-            })
+            });
 
-        
-        
+            $('body').on('click', '#btn_del', function (event) {
+                event.preventDefault();
+                var user_id = <?php echo $auth->id()?>;
+                var movie_id = $("input[name='id']").val();
+
+
+                var clonedStarIcon = starIcon.clone();
+                var clonedFilledStarIcon = filledStarIcon.clone();
+
+                clonedFilledStarIcon.replaceWith(clonedStarIcon);
+                $(this).replaceWith(clonedStarIcon);
+                clonedStarIcon.attr('id', 'btn_add');
+
+                $.ajax({
+                    method: "GET",
+                    url: "/favorites/destroy",
+                    data: {
+                        user_id: user_id,
+                        movie_id: movie_id,
+                    }
+                })
+                    .done(function (msg) {
+                        console.log(msg);
+                    });
+            });
+        });
+
+
+
     </script>
 
 <?php $view->components('end'); ?>
