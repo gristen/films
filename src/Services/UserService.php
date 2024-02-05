@@ -35,7 +35,7 @@ class UserService
             $user['name'],
             $user['email'],
             $user['create_at'],
-            $user['is_admin'],
+            $user['id_role'],
             $user['avatar'],
             $user['password'],
         );
@@ -51,6 +51,7 @@ class UserService
             'email' => $email,
             'password' => $password,
             'avatar' => $avatarPath,
+            'id_role' => 1,
 
         ]);
     }

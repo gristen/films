@@ -9,7 +9,7 @@ class User
         private string $name,
         private string $email,
         private string $create_at,
-        private int $is_admin,
+        private string $role,
         private string $avatar,
         private string $password,
     ) {
@@ -41,13 +41,13 @@ class User
         return $this->create_at;
     }
 
-    public function getIsAdmin(): int
-    {
-        return $this->is_admin;
-    }
-
     public function getAvatar(): string
     {
         return $this->avatar;
+    }
+
+    public function getRole(): string
+    {
+        return $this->role;
     }
 }

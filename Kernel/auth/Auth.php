@@ -59,7 +59,7 @@ class Auth implements AuthInterface
         ]);
         if ($user) {
 
-            return new User($user['id'], $user['name'], $user[$this->email()], $user['create_at'], $user['is_admin'],
+            return new User($user['id'], $user['name'], $user[$this->email()], $user['create_at'], $user['role'],
                 $user['avatar'], $user[$this->password()]);
         }
 
@@ -72,7 +72,7 @@ class Auth implements AuthInterface
             'id' => $this->session->get($this->sessionField()),
         ]);
 
-        if ($user['is_admin'] === 1) {
+        if ($user['role'] === '2') {
             return true;
         }
 
