@@ -28,9 +28,9 @@ interface DumperInterface
     /**
      * Dumps a string.
      *
-     * @param  string  $str The string being dumped
-     * @param  bool  $bin Whether $str is UTF-8 or binary encoded
-     * @param  int  $cut The number of characters $str has been cut by
+     * @param  string  $str  The string being dumped
+     * @param  bool  $bin  Whether $str is UTF-8 or binary encoded
+     * @param  int  $cut  The number of characters $str has been cut by
      * @return void
      */
     public function dumpString(Cursor $cursor, string $str, bool $bin, int $cut);
@@ -38,9 +38,9 @@ interface DumperInterface
     /**
      * Dumps while entering an hash.
      *
-     * @param  int  $type     A Cursor::HASH_* const for the type of hash
-     * @param  string|int|null  $class    The object class, resource type or array count
-     * @param  bool  $hasChild When the dump of the hash has child item
+     * @param  int  $type  A Cursor::HASH_* const for the type of hash
+     * @param  string|int|null  $class  The object class, resource type or array count
+     * @param  bool  $hasChild  When the dump of the hash has child item
      * @return void
      */
     public function enterHash(Cursor $cursor, int $type, string|int|null $class, bool $hasChild);
@@ -48,10 +48,10 @@ interface DumperInterface
     /**
      * Dumps while leaving an hash.
      *
-     * @param  int  $type     A Cursor::HASH_* const for the type of hash
-     * @param  string|int|null  $class    The object class, resource type or array count
-     * @param  bool  $hasChild When the dump of the hash has child item
-     * @param  int  $cut      The number of items the hash has been cut by
+     * @param  int  $type  A Cursor::HASH_* const for the type of hash
+     * @param  string|int|null  $class  The object class, resource type or array count
+     * @param  bool  $hasChild  When the dump of the hash has child item
+     * @param  int  $cut  The number of items the hash has been cut by
      * @return void
      */
     public function leaveHash(Cursor $cursor, int $type, string|int|null $class, bool $hasChild, int $cut);

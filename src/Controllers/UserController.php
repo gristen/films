@@ -21,11 +21,6 @@ class UserController extends Controller
 
     }
 
-    public function showFavorites(): void
-    {
-        $this->service()->getFavoritesMovies($this->auth()->id());
-    }
-
     public function service(): UserService
     {
         if (! isset($this->service)) {

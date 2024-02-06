@@ -23,6 +23,7 @@ class CliDumper extends AbstractDumper
 {
     public static $defaultColors;
 
+    /** @var callable|resource|string|null */
     public static $defaultOutput = 'php://stdout';
 
     protected $colors;
@@ -68,7 +69,7 @@ class CliDumper extends AbstractDumper
 
     private bool $handlesHrefGracefully;
 
-    public function __construct($output = null, string $charset = null, int $flags = 0)
+    public function __construct($output = null, ?string $charset = null, int $flags = 0)
     {
         parent::__construct($output, $charset, $flags);
 
@@ -113,7 +114,7 @@ class CliDumper extends AbstractDumper
     /**
      * Configures styles.
      *
-     * @param  array  $styles A map of style names to style definitions
+     * @param  array  $styles  A map of style names to style definitions
      * @return void
      */
     public function setStyles(array $styles)
@@ -124,7 +125,7 @@ class CliDumper extends AbstractDumper
     /**
      * Configures display options.
      *
-     * @param  array  $displayOptions A map of display options to customize the behavior
+     * @param  array  $displayOptions  A map of display options to customize the behavior
      * @return void
      */
     public function setDisplayOptions(array $displayOptions)
@@ -344,8 +345,8 @@ class CliDumper extends AbstractDumper
     /**
      * Dumps an ellipsis for cut children.
      *
-     * @param  bool  $hasChild When the dump of the hash has child item
-     * @param  int  $cut      The number of items the hash has been cut by
+     * @param  bool  $hasChild  When the dump of the hash has child item
+     * @param  int  $cut  The number of items the hash has been cut by
      * @return void
      */
     protected function dumpEllipsis(Cursor $cursor, bool $hasChild, int $cut)
@@ -448,8 +449,8 @@ class CliDumper extends AbstractDumper
     /**
      * Decorates a value with some style.
      *
-     * @param  string  $style The type of style being applied
-     * @param  string  $value The value being styled
+     * @param  string  $style  The type of style being applied
+     * @param  string  $value  The value being styled
      * @param  array  $attr  Optional context information
      */
     protected function style(string $style, string $value, array $attr = []): string
@@ -540,7 +541,7 @@ class CliDumper extends AbstractDumper
         if ($this->outputStream !== static::$defaultOutput) {
             return $this->hasColorSupport($this->outputStream);
         }
-        if (static::$defaultColors !== null) {
+        if (isset(static::$defaultColors)) {
             return static::$defaultColors;
         }
         if (isset($_SERVER['argv'][1])) {
@@ -579,6 +580,10 @@ class CliDumper extends AbstractDumper
      */
     protected function dumpLine(int $depth, bool $endOfValue = false)
     {
+        if ($this->colors === null) {
+            $this->colors = $this->supportsColors();
+        }
+
         if ($this->colors) {
             $this->line = sprintf("\033[%sm%s\033[m", $this->styles['default'], $this->line);
         }

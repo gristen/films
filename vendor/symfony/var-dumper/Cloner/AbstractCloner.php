@@ -218,11 +218,11 @@ abstract class AbstractCloner implements ClonerInterface
     private int $filter = 0;
 
     /**
-     * @param  callable[]|null  $casters A map of casters
+     * @param  callable[]|null  $casters  A map of casters
      *
      * @see addCasters
      */
-    public function __construct(array $casters = null)
+    public function __construct(?array $casters = null)
     {
         $this->addCasters($casters ?? static::$defaultCasters);
     }
@@ -235,7 +235,7 @@ abstract class AbstractCloner implements ClonerInterface
      * Resource types are to be prefixed with a `:`,
      * see e.g. static::$defaultCasters.
      *
-     * @param  callable[]  $casters A map of casters
+     * @param  callable[]  $casters  A map of casters
      * @return void
      */
     public function addCasters(array $casters)
@@ -279,7 +279,7 @@ abstract class AbstractCloner implements ClonerInterface
     /**
      * Clones a PHP variable.
      *
-     * @param  int  $filter A bit field of Caster::EXCLUDE_* constants
+     * @param  int  $filter  A bit field of Caster::EXCLUDE_* constants
      */
     public function cloneVar(mixed $var, int $filter = 0): Data
     {
@@ -319,7 +319,7 @@ abstract class AbstractCloner implements ClonerInterface
     /**
      * Casts an object to an array representation.
      *
-     * @param  bool  $isNested True if the object is nested in the dumped structure
+     * @param  bool  $isNested  True if the object is nested in the dumped structure
      */
     protected function castObject(Stub $stub, bool $isNested): array
     {
@@ -376,7 +376,7 @@ abstract class AbstractCloner implements ClonerInterface
     /**
      * Casts a resource to an array representation.
      *
-     * @param  bool  $isNested True if the object is nested in the dumped structure
+     * @param  bool  $isNested  True if the object is nested in the dumped structure
      */
     protected function castResource(Stub $stub, bool $isNested): array
     {

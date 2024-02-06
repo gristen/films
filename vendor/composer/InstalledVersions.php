@@ -116,7 +116,7 @@ class InstalledVersions
      *
      *   Composer\InstalledVersions::satisfies(new VersionParser, 'foo/bar', '^2.3')
      *
-     * @param  VersionParser  $parser      Install composer/semver to have access to this class and functionality
+     * @param  VersionParser  $parser  Install composer/semver to have access to this class and functionality
      * @param  string  $packageName
      * @param  string|null  $constraint  A version constraint to check for, if you pass one you have to make sure composer/semver is required by your package
      * @return bool
@@ -308,7 +308,7 @@ class InstalledVersions
      * the project in which it runs can then also use this class safely, without
      * interference between PHPUnit's dependencies and the project's dependencies.
      *
-     * @param  array[]  $data A vendor/composer/installed.php data set
+     * @param  array[]  $data  A vendor/composer/installed.php data set
      * @return void
      *
      * @psalm-param array{root: array{name: string, pretty_version: string, version: string, reference: string|null, type: string, install_path: string, aliases: string[], dev: bool}, versions: array<string, array{pretty_version?: string, version?: string, reference?: string|null, type?: string, install_path?: string, aliases?: string[], dev_requirement: bool, replaced?: string[], provided?: string[]}>} $data

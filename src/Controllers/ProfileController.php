@@ -13,7 +13,7 @@ class ProfileController extends Controller
     public function index(): void
     {
         $userId = $this->request()->input('id');
-        $favorites = $this->service()->getFavoritesMovies($this->auth()->id());
+        $favorites = $this->service()->getFavoritesMovies($userId);
 
         $user = $this->service()->find($userId);
 

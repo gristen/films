@@ -158,7 +158,7 @@ class ClassLoader
     }
 
     /**
-     * @param  array<string, string>  $classMap Class to filename map
+     * @param  array<string, string>  $classMap  Class to filename map
      * @return void
      */
     public function addClassMap(array $classMap)
@@ -175,8 +175,8 @@ class ClassLoader
      * appending or prepending to the ones previously set for this prefix.
      *
      * @param  string  $prefix  The prefix
-     * @param  list<string>|string  $paths   The PSR-0 root directories
-     * @param  bool  $prepend Whether to prepend the directories
+     * @param  list<string>|string  $paths  The PSR-0 root directories
+     * @param  bool  $prepend  Whether to prepend the directories
      * @return void
      */
     public function add($prefix, $paths, $prepend = false)
@@ -222,8 +222,8 @@ class ClassLoader
      * appending or prepending to the ones previously set for this namespace.
      *
      * @param  string  $prefix  The prefix/namespace, with trailing '\\'
-     * @param  list<string>|string  $paths   The PSR-4 base directories
-     * @param  bool  $prepend Whether to prepend the directories
+     * @param  list<string>|string  $paths  The PSR-4 base directories
+     * @param  bool  $prepend  Whether to prepend the directories
      * @return void
      *
      * @throws \InvalidArgumentException
@@ -271,7 +271,7 @@ class ClassLoader
      * Registers a set of PSR-0 directories for a given prefix,
      * replacing any others previously set for this prefix.
      *
-     * @param  string  $prefix The prefix
+     * @param  string  $prefix  The prefix
      * @param  list<string>|string  $paths  The PSR-0 base directories
      * @return void
      */
@@ -288,7 +288,7 @@ class ClassLoader
      * Registers a set of PSR-4 directories for a given namespace,
      * replacing any others previously set for this namespace.
      *
-     * @param  string  $prefix The prefix/namespace, with trailing '\\'
+     * @param  string  $prefix  The prefix/namespace, with trailing '\\'
      * @param  list<string>|string  $paths  The PSR-4 base directories
      * @return void
      *
@@ -376,7 +376,7 @@ class ClassLoader
     /**
      * Registers this instance as an autoloader.
      *
-     * @param  bool  $prepend Whether to prepend the autoloader or not
+     * @param  bool  $prepend  Whether to prepend the autoloader or not
      * @return void
      */
     public function register($prepend = false)
@@ -412,7 +412,7 @@ class ClassLoader
     /**
      * Loads the given class or interface.
      *
-     * @param  string  $class The name of the class
+     * @param  string  $class  The name of the class
      * @return true|null True if loaded, null otherwise
      */
     public function loadClass($class)
@@ -430,7 +430,7 @@ class ClassLoader
     /**
      * Finds the path to the file where the class is defined.
      *
-     * @param  string  $class The name of the class
+     * @param  string  $class  The name of the class
      * @return string|false The path if found, false otherwise
      */
     public function findFile($class)

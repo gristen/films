@@ -31,8 +31,8 @@ class Connection
     private $socket;
 
     /**
-     * @param  string  $host             The server host
-     * @param  ContextProviderInterface[]  $contextProviders Context providers indexed by context name
+     * @param  string  $host  The server host
+     * @param  ContextProviderInterface[]  $contextProviders  Context providers indexed by context name
      */
     public function __construct(string $host, array $contextProviders = [])
     {
@@ -63,7 +63,7 @@ class Connection
         $context = array_filter($context);
         $encodedPayload = base64_encode(serialize([$data, $context]))."\n";
 
-        set_error_handler(fn () => true);
+        set_error_handler(static fn () => null);
         try {
             if (stream_socket_sendto($this->socket, $encodedPayload) !== -1) {
                 return true;
@@ -88,7 +88,7 @@ class Connection
      */
     private function createSocket()
     {
-        set_error_handler(fn () => true);
+        set_error_handler(static fn () => null);
         try {
             return stream_socket_client($this->host, $errno, $errstr, 3) ?: null;
         } finally {

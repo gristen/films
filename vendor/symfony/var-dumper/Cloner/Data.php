@@ -17,7 +17,7 @@ use Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class Data implements \ArrayAccess, \Countable, \IteratorAggregate
+class Data implements \ArrayAccess, \Countable, \IteratorAggregate, \Stringable
 {
     private array $data;
 
@@ -34,7 +34,7 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
     private array $context = [];
 
     /**
-     * @param  array  $data An array as returned by ClonerInterface::cloneVar()
+     * @param  array  $data  An array as returned by ClonerInterface::cloneVar()
      */
     public function __construct(array $data)
     {
@@ -70,7 +70,7 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Returns a native representation of the original value.
      *
-     * @param  array|bool  $recursive Whether values should be resolved recursively or not
+     * @param  array|bool  $recursive  Whether values should be resolved recursively or not
      * @return string|int|float|bool|array|Data[]|null
      */
     public function getValue(array|bool $recursive = false): string|int|float|bool|array|null
@@ -126,6 +126,9 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
         yield from $value;
     }
 
+    /**
+     * @return mixed
+     */
     public function __get(string $key)
     {
         if (null !== $data = $this->seek($key)) {
@@ -198,7 +201,7 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Enables/disables objects' identifiers tracking.
      *
-     * @param  bool  $useRefHandles False to hide global ref. handles
+     * @param  bool  $useRefHandles  False to hide global ref. handles
      */
     public function withRefHandles(bool $useRefHandles): static
     {
@@ -288,7 +291,7 @@ class Data implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Depth-first dumping of items.
      *
-     * @param  mixed  $item A Stub object or the original value being dumped
+     * @param  mixed  $item  A Stub object or the original value being dumped
      */
     private function dumpItem(DumperInterface $dumper, Cursor $cursor, array &$refs, mixed $item): void
     {
