@@ -22,7 +22,11 @@
                     <h5 class="card-title"><?php echo $user->getName(); ?></h5>
                     <p class="card-text"><?php echo $user->getEmail(); ?></p>
                     <p class="card-text"><small class="text-muted">Зарегистрирован: <?php echo $user->getCreateAt(); ?></small></p>
-                    <p class="card-text"><small class="text-muted">Статус: <?php echo $user->getRole() ? 'Администратор' : 'Пользователь'; ?></small></p>
+                    <p class="card-text"><small class="text-muted">Статус: <?php if ($user->getRole() == 1) {
+                        echo 'Пользователь';
+                    } else {
+                        echo 'Администратор';
+                    }?></small></p>
                 </div>
             </div>
         </div>
@@ -37,7 +41,7 @@
                                 <h5 class="card-title"><?php echo $favoriteMovie->getName() ?></h5>
                                 <p class="card-text"><?php echo $favoriteMovie->getDescription() ?></p>
                                 <p class="card-text btn btn-outline-info"><?php echo $favoriteMovie->avgRating() ?></p>
-                                <a href="#" class="btn btn-primary">Подробнее</a>
+                               
                             </div>
                         </div>
                     </div>

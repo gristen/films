@@ -16,6 +16,6 @@ class AdminController extends Controller
         $this->view('admin', [
             'categories' => $categories->all(),
             'movies' => $movies->all(),
-        ]);
+        ], 'Админ панель');
     }
 }
