@@ -119,8 +119,6 @@
 
                                 </li>
                                 <li>
-
-
                                     <form action="/admin/categories/destroy" method="post">
                                         <input type="hidden" name="id" value="<?php echo $category->getId() ?>">
                                         <button class="dropdown-item" href="#">

@@ -42,6 +42,9 @@ return [
 
     Route::post('/reviews/add', [ReviewController::class, 'store']),
 
+    //admin
+    Route::get('/admin/users', [UserController::class, 'admin']),
+    Route::get('/admin/user/update', [UserController::class, 'edit']),
     //
 
     Route::get('/profile', [ProfileController::class, 'index']),

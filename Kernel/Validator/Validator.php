@@ -72,6 +72,8 @@ class Validator implements ValidatorInterface
                     return "Field $key must be confirmed";
                 }
                 break;
+            case'passwordDB':
+
         }
 
         return false;

@@ -5,11 +5,9 @@
 $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
-return [
-    'Symfony\\Polyfill\\Mbstring\\' => [$vendorDir.'/symfony/polyfill-mbstring'],
-    'Symfony\\Component\\VarDumper\\' => [$vendorDir.'/symfony/var-dumper'],
-    'Database\\Seeders\\' => [$vendorDir.'/laravel/pint/database/seeders'],
-    'Database\\Factories\\' => [$vendorDir.'/laravel/pint/database/factories'],
-    'App\\Kernel\\' => [$baseDir.'/Kernel'],
-    'App\\' => [$baseDir.'/src', $vendorDir.'/laravel/pint/app'],
-];
+return array(
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),
+    'App\\Kernel\\' => array($baseDir . '/Kernel'),
+    'App\\' => array($baseDir . '/src'),
+);

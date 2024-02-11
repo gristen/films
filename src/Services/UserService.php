@@ -11,19 +11,9 @@ class UserService
 {
     private ?MoviesService $moviesService;
 
-    public function __construct(private readonly DatabaseInterface $db, MoviesService $moviesService = null)
+    public function __construct(private readonly DatabaseInterface $db, ?MoviesService $moviesService = null)
     {
         $this->moviesService = $moviesService;
-    }
-
-    public function isMovieFavorited(int $userId, int $movieId): bool
-    {
-        $favorite = $this->db->first('favorites', [
-            'user_id' => $userId,
-            'film_id' => $movieId,
-        ]);
-
-        return ! empty($favorite);
     }
 
     public function find(int $id): User
@@ -80,5 +70,24 @@ class UserService
 
             );
         }, $movies);
+    }
+
+    public function getUsers(): array
+    {
+        $users = $this->db->get('users');
+
+        return array_map(function ($user) {
+
+            return new User(
+                $user['id'],
+                $user['name'],
+                $user['email'],
+                $user['create_at'],
+                $user['id_role'],
+                $user['avatar'],
+                $user['password'],
+
+            );
+        }, $users);
     }
 }

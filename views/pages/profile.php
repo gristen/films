@@ -21,12 +21,12 @@
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $user->getName(); ?></h5>
                     <p class="card-text"><?php echo $user->getEmail(); ?></p>
+                    <p class="card-text ">  Статус: <small>
+                      <?php echo ($user->getRole() == 1) ? 'Пользователь' : 'Администратор'; ?>
+
+                        </small>
+
                     <p class="card-text"><small class="text-muted">Зарегистрирован: <?php echo $user->getCreateAt(); ?></small></p>
-                    <p class="card-text"><small class="text-muted">Статус: <?php if ($user->getRole() == 1) {
-                        echo 'Пользователь';
-                    } else {
-                        echo 'Администратор';
-                    }?></small></p>
                 </div>
             </div>
         </div>

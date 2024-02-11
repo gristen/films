@@ -40,10 +40,15 @@ $user = $auth->user();
                         </svg>
                         <span>Жанры</span>
                     </a>
+
                 </li>
+                <a class="btn btn-outline-info " href="/admin">admin panel</a>
             </ul>
+
             <div class="d-flex  align-items-center text-end">
-               
+               <?php if ($auth->isAdmin()) { ?>
+
+               <?php }?>
             <?php if ($auth->check()) {   ?>
                 <a  class="username" href="/profile?id=<?php echo $user->getId()?>"><?php echo $user->getName()?></a>
                 <a class="btn btn-danger" href="/logout">
