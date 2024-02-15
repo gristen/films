@@ -71,10 +71,12 @@ class Auth implements AuthInterface
         $user = $this->database->first('users', [
             'id' => $this->session->get($this->sessionField()),
         ]);
-
-        if ($user['id_role'] === 2) {
-            return true;
+        if ($user!==null){
+            if ($user['id_role'] === 2) {
+                return true;
+            }
         }
+
 
         return false;
     }

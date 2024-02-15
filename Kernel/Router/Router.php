@@ -36,7 +36,7 @@ class Router implements RouterInterface
         $route = $this->findRoute($uri, $method);
 
         if (! $route) {
-            echo '404';
+            $this->view->page("404",[],"упс...");
             exit();
         }
 
