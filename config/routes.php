@@ -52,4 +52,8 @@ return [
     Route::get('/favorites', [UserController::class, 'favorites']),
     Route::get('/favorites/destroy', [UserController::class, 'favoritesDestroy']),
 
+
+
+    Route::get('/best', [MovieController::class, 'best']),
+
 ];

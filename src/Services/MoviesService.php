@@ -154,4 +154,10 @@ class MoviesService
 
         return ! empty($favorite);
     }
+
+    //TODO: РЕАЛИЗОВАТЬ
+    public function getBestMovie():array
+    {
+
+    }
 }

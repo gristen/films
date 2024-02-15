@@ -22,6 +22,11 @@ class MovieController extends Controller
         $this->view('admin/movies/add');
     }
 
+    public function best():void
+    {
+        $this->view('best');
+    }
+
     public function store(): void
     {
 

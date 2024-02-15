@@ -22,7 +22,7 @@ body {background-size:cover}
 <body>
 <div class="content">
 	<a href="/">Перейти к главной странице</a><br><br>
-	
+
 </div>
 
 </body>
