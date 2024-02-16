@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 04 2024 г., 20:33
--- Версия сервера: 5.6.51
+-- Время создания: Фев 16 2024 г., 11:34
+-- Версия сервера: 5.6.51-log
 -- Версия PHP: 8.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `preview` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -38,10 +39,8 @@ CREATE TABLE `categories` (
 -- Дамп данных таблицы `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Комедия', '2024-02-02 16:20:32', '2024-02-02 16:20:32'),
-(2, 'Ужасы', '2024-02-02 16:20:37', '2024-02-02 16:20:37'),
-(3, 'Драма', '2024-02-02 16:20:42', '2024-02-02 16:20:42');
+INSERT INTO `categories` (`id`, `name`, `preview`, `created_at`, `updated_at`) VALUES
+(5, 'qweqweqwe', 'categories/preview/5f068984459e0abc3a4ba5198f5e218c.jpg', '2024-02-16 07:07:38', '2024-02-16 07:07:38');
 
 -- --------------------------------------------------------
 
@@ -60,7 +59,8 @@ CREATE TABLE `favorites` (
 --
 
 INSERT INTO `favorites` (`id`, `user_id`, `film_id`) VALUES
-(1, 1, 1);
+(1, 1, 2),
+(2, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -84,7 +84,9 @@ CREATE TABLE `movies` (
 --
 
 INSERT INTO `movies` (`id`, `film`, `name`, `description`, `preview`, `category_id`, `create_at`, `updated_at`) VALUES
-(1, 'movies/ce315a40898cca0a4fe334fa11daf493.mp4', 'Наруто', 'аниме крутое', 'movies/preview/2f72b18fa05b401218e7745165e29bbb.jpg', 2, '2024-02-02 16:21:52', '2024-02-02 16:21:52');
+(2, 'movies/93b403de76d97a9c6d4e36fa7d12375a.mp4', 'Николай1', 'НиколайНиколайНиколайНиколай', 'movies/preview/c85b76728982bef45d388fe5eb4be878.png', 2, '2024-02-15 08:57:11', '2024-02-15 08:57:11'),
+(3, 'movies/93b403de76d97a9c6d4e36fa7d12375a.mp4', 'Николай2', 'НиколайНиколайНиколайНиколай', 'movies/preview/c85b76728982bef45d388fe5eb4be878.png', 2, '2024-02-15 08:57:11', '2024-02-15 08:57:11'),
+(4, 'movies/a0bd48dc5f7c9cc660c67aebc123e186.mp4', 'ТУпой и еще тупее', 'два даунича', 'movies/preview/2716fbd7fa57494eebbe65d32e7fafe4.jpg', 5, '2024-02-16 07:56:24', '2024-02-16 07:56:24');
 
 -- --------------------------------------------------------
 
@@ -107,7 +109,26 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `user_id`, `movie_id`, `review`, `rating`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'йцу', 3, '2024-02-02 16:22:19', '2024-02-02 16:22:19');
+(1, 1, 4, 'Крутой фильм', 10, '2024-02-16 08:02:54', '2024-02-16 08:02:54');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`) VALUES
+(1, 'user'),
+(2, 'admin');
 
 -- --------------------------------------------------------
 
@@ -121,7 +142,7 @@ CREATE TABLE `users` (
   `email` varchar(111) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(111) COLLATE utf8mb4_unicode_ci NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `id_role` int(11) NOT NULL DEFAULT '1',
   `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -129,9 +150,8 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `create_at`, `is_admin`, `avatar`) VALUES
-(1, 'qwe', 'dima.gordienkog@gmail.com', '$2y$10$mPv1BcuipAqEnnOV1C3EOOCSJww5nfv/06xHYkXfx0xDZkrbF8Ay.', '2024-02-02 15:52:50', 1, '/user/avatars/ef0070ce0c369f2afc14f7dae428e85d.jpg'),
-(2, 'qweqwe', 'asd@mail.ru', '$2y$10$tjNSBYgmd/cJxU.yYYhzmOSbKI6/c4xxjGJ/AcZlI1WlF1KIblvVe', '2024-02-02 16:12:27', 0, '/user/avatars/b12c315c173ff5dc3021a46c0747b2e4.jpg');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `create_at`, `id_role`, `avatar`) VALUES
+(1, 'dmitriy', 'asd@mail.ru', '$2y$10$qn1dxHS/6Tez8VyXgBuIA.Kv5K71pJ710JeL5YvIvDd1AeObXPB/6', '2024-02-15 08:38:43', 2, '/user/avatars/88a48047271d8aae1a1737a493dcb1fb.jpg');
 
 --
 -- Индексы сохранённых таблиц
@@ -159,6 +179,13 @@ ALTER TABLE `movies`
 -- Индексы таблицы `reviews`
 --
 ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`,`movie_id`);
+
+--
+-- Индексы таблицы `roles`
+--
+ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -166,7 +193,8 @@ ALTER TABLE `reviews`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `id_role` (`id_role`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -176,19 +204,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `reviews`
@@ -197,10 +225,26 @@ ALTER TABLE `reviews`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT для таблицы `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

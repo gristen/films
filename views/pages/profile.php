@@ -35,13 +35,15 @@
             <div class="row">
                 <?php foreach ($favorites as $favoriteMovie) { ?>
                     <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="<?php echo $storage->url($favoriteMovie->getPreview()) ?>" class="card-img-top" alt="<?php echo $favoriteMovie->getName() ?>">
+                        <div style=" height: 368px" class="card">
+                            <img src="<?php echo $storage->url($favoriteMovie->getPreview()) ?>" style="height: 200px; width: 270px;" class="card-img-top" alt="<?php echo $favoriteMovie->getName() ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $favoriteMovie->getName() ?></h5>
                                 <p class="card-text"><?php echo $favoriteMovie->getDescription() ?></p>
-                                <p class="card-text btn btn-outline-info"><?php echo $favoriteMovie->avgRating() ?></p>
-                               
+                               <!-- <p class="card-text btn btn-outline-info"><?php /*echo $favoriteMovie->avgRating() */?></p>-->
+
+                                    <button id="btn_del" class="btn btn-danger"  style="position: absolute;bottom:10px;">Удалить из избранного</button>
+
                             </div>
                         </div>
                     </div>
@@ -50,5 +52,27 @@
         </div>
     </div>
 </div>
+<script>
 
+    $(document).ready(function () {
+        $('body').on('click', '#btn_del', function (event) {
+
+            event.preventDefault();
+            var user_id = <?php echo $auth->id()?>;
+            var movie_id = $("input[name='id']").val();
+            $.ajax({
+                method: "GET",
+                url: "/favorites/destroy",
+                data: {
+                    user_id: user_id,
+                    movie_id: movie_id,
+                }
+            })
+                .done(function (msg) {
+                    console.log(msg);
+                });
+        });
+
+    });
+</script>
 <?php $view->components('end'); ?>
