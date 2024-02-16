@@ -24,7 +24,9 @@ class MovieController extends Controller
 
     public function best():void
     {
-        $this->view('best');
+
+        $this->view('best',['movies'=>$this->service()->getBestMovies()]);
+
     }
 
     public function store(): void

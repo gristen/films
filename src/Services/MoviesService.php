@@ -156,8 +156,40 @@ class MoviesService
     }
 
     //TODO: РЕАЛИЗОВАТЬ
-    public function getBestMovie():array
+    public function getBestMovies(int $limit = 10): array
     {
+        $moviesData = $this->db->get('movies');
+        $movies = [];
+        $sortedMovies = [];
 
+        foreach ($moviesData as $movieData) {
+            $movie = new Movie(
+                $movieData['id'],
+                $movieData['film'],
+                $movieData['name'],
+                $movieData['description'],
+                $movieData['preview'],
+                $movieData['category_id'],
+                $movieData['create_at'],
+                $this->getReviews($movieData['id'])
+            );
+
+            $movies[] = $movie;
+        }
+
+        // Сортировка массива фильмов по среднему рейтингу
+        usort($movies, function($a, $b) {
+            return $b->avgRating() <=> $a->avgRating();
+        });
+
+        // Получение первых $limit фильмов с наивысшим рейтингом
+        $sortedMovies = array_slice($movies, 0, $limit);
+
+        return $sortedMovies;
     }
+
+
+
+
+
 }
