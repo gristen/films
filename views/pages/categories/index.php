@@ -14,7 +14,7 @@
         <div class="movies">
             <?php foreach ($categories as $category){ ?>
 
-            <a href="movie.html" class="card text-decoration-none movies__item">
+            <a href="/category?filter=<?php echo $category->getName()?>" class="card text-decoration-none movies__item">
                 <img src="<?php echo $storage->url($category->getPreview())?>" height="200px" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $category->getName() ?>></h5>

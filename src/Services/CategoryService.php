@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Kernel\Database\DatabaseInterface;
 use App\Kernel\upload\UploadedInterface;
 use App\Models\Category;
+use App\Models\Movie;
 
 class CategoryService
 {
@@ -26,6 +27,26 @@ class CategoryService
                 updatedAt: $category['updated_at'],
             );
         }, $categories);
+
+    }
+
+    public function getCategory(string $name):array
+    {
+        $data = $this->db->get('categories',['name'=>$name]);
+
+        $categoryId = $data[0]['id'];
+        $movies = $this->db->get('movies',['category_id'=>$categoryId]);
+        return array_map(function ($movie){
+            return new Movie(
+                $movie['id'],
+                $movie['film'],
+                $movie['name'],
+                $movie['description'],
+                $movie['preview'],
+                $movie['category_id'],
+                $movie['create_at'],
+            );
+        },$movies);
 
     }
 

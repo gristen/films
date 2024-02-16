@@ -12,6 +12,15 @@ class CategoriesController extends Controller
         $this->view('admin/categories/add');
     }
 
+    public function category():void
+    {
+        $filter = $this->request()->input('filter');
+
+
+        $this->view('/categories/category',['movies'=>$this->service()->getCategory($filter)]);
+
+    }
+
     public function index():void
     {
         $this->view('/categories/index',['categories'=>$this->service()->all()]);
