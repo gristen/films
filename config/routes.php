@@ -55,5 +55,6 @@ return [
 
 
     Route::get('/best', [MovieController::class, 'best']),
+    Route::get('/categories', [CategoriesController::class, 'index']),
 
 ];

@@ -7,6 +7,7 @@ class Category
     public function __construct(
         private int $id,
         private string $name,
+        private string $preview,
         private string $createdAt,
         private string $updatedAt,
     ) {
@@ -30,5 +31,13 @@ class Category
     public function getUpdatedAt(): string
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPreview(): string
+    {
+        return $this->preview;
     }
 }

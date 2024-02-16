@@ -155,7 +155,7 @@ class MoviesService
         return ! empty($favorite);
     }
 
-    //TODO: РЕАЛИЗОВАТЬ
+
     public function getBestMovies(int $limit = 10): array
     {
         $moviesData = $this->db->get('movies');

@@ -12,6 +12,10 @@ class CategoriesController extends Controller
         $this->view('admin/categories/add');
     }
 
+    public function index():void
+    {
+        $this->view('/categories/index',['categories'=>$this->service()->all()]);
+    }
     public function update(): void
     {
 
@@ -64,7 +68,18 @@ class CategoriesController extends Controller
 
             $this->redirect('/admin/categories/add');
         }
-        $service->insert($this->request()->input('name'));
+
+        $service->insert($this->request()->input('name'),$this->request()->file('image'));
         $this->redirect('/admin');
+    }
+
+
+    public function service(): CategoryService
+    {
+        if (! isset($this->service)) {
+            $this->service = new CategoryService($this->db());
+        }
+
+        return $this->service;
     }
 }

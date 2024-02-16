@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Kernel\Database\DatabaseInterface;
+use App\Kernel\upload\UploadedInterface;
 use App\Models\Category;
 
 class CategoryService
@@ -20,6 +21,7 @@ class CategoryService
             return new Category(
                 id: $category['id'],
                 name: $category['name'],
+                preview: $category['preview'],
                 createdAt: $category['created_at'],
                 updatedAt: $category['updated_at'],
             );
@@ -32,9 +34,11 @@ class CategoryService
         $this->db->delete('categories', ['id' => $id]);
     }
 
-    public function insert(string $name): void
+    public function insert(string $name,UploadedInterface $image): void
     {
-        $this->db->insert('categories', ['name' => $name]);
+
+        $imagePath = $image->move('categories/preview');
+        $this->db->insert('categories', ['name' => $name,'preview'=>$imagePath]);
     }
 
     public function find(int $id): ?Category
