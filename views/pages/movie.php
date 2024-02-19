@@ -100,7 +100,7 @@
                                 <?php foreach ($movie->getReviews() as $review) { ?>
                                 <div class="one-movie__reviews">
                                     <div class="card">
-                                        <div class="card-header">
+                                        <div class="card-header <?php echo $review->getUser()->getUserRole()?>">
                                             Пользователь:   <?php echo $review->getUser()->getName() ?>
                                         </div>
                                         <div class="card-body">

@@ -59,9 +59,9 @@ class User
         // Определяем название роли пользователя с помощью оператора switch
         switch ($roleId) {
             case 2:
-                return 'admin';
+                return 'Administrator';
             case 1:
-                return 'user';
+                return 'User';
             default:
                 return 'Неизвестная роль';
         }

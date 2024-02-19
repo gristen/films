@@ -19,14 +19,14 @@
             <div class="card">
                 <img src="<?php echo $storage->url($user->getAvatar()) ?>" class="card-img-top" alt="User Avatar">
                 <div class="card-body">
-                    <h5 class="card-title"><?php echo $user->getName(); ?></h5>
-                    <p class="card-text"><?php echo $user->getEmail(); ?></p>
+                    <h5 class="card-title ">Имя пользователя: <span class="<?php echo $user->getUserRole()?>"><?php echo $user->getName(); ?></span></h5>
+                    <p class="card-text">Емайл: <?php echo $user->getEmail(); ?></p>
                     <p class="card-text ">  Статус: <small>
-                      <?php echo ($user->getRole() == 1) ? 'Пользователь' : 'Администратор'; ?>
+                      <?php echo $user->getUserRole() ?>
 
                         </small>
 
-                    <p class="card-text"><small class="text-muted">Зарегистрирован: <?php echo $user->getCreateAt(); ?></small></p>
+                    <p class="card-text"><small class="text-muted">Дата регистрации: <?php echo $user->getCreateAt(); ?></small></p>
                 </div>
             </div>
         </div>
@@ -41,6 +41,7 @@
                                 <input name="movie_id" type="hidden" value="<?php echo $favoriteMovie->getId() ?>">
                                 <h5 class="card-title"><?php echo $favoriteMovie->getName() ?></h5>
                                 <p class="card-text"><?php echo $favoriteMovie->getDescription() ?></p>
+                                <?php if ($user->getRole() == 2 || $user->getId() === $auth->user()->getId()) ?>
                                 <button class="btn btn-danger btn_del" style="position: absolute;bottom:10px;">Удалить из избранного</button>
                             </div>
                         </div>

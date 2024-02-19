@@ -7,7 +7,7 @@ body {
 }
 
 /* Неоново-красный стиль для администратора */
-.admin {
+.Administrator {
     color: #ff0000; /* Красный цвет текста */
     text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000, 0 0 20px #ff0000; /* Неоновый эффект тени */
     animation: flickerAnimation 1.5s infinite alternate; /* Анимация мерцания */
