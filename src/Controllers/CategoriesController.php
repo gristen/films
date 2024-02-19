@@ -23,7 +23,7 @@ class CategoriesController extends Controller
 
     public function index():void
     {
-        $this->view('/categories/index',['categories'=>$this->service()->all()]);
+        $this->view('/categories/index',['categories'=>$this->service()->all()],'Жанры');
     }
     public function update(): void
     {

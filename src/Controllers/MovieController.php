@@ -19,13 +19,13 @@ class MovieController extends Controller
 
     public function add(): void
     {
-        $this->view('admin/movies/add');
+        $this->view('admin/movies/add',[],'Добавление фильма');
     }
 
     public function best():void
     {
 
-        $this->view('best',['movies'=>$this->service()->getBestMovies()]);
+        $this->view('best',['movies'=>$this->service()->getBestMovies()],'Лучшее');
 
     }
 

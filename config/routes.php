@@ -45,6 +45,7 @@ return [
     //admin
     Route::get('/admin/users', [UserController::class, 'admin']),
     Route::get('/admin/user/update', [UserController::class, 'edit']),
+    Route::post('/admin/user/update', [UserController::class, 'update']),
     //
 
     Route::get('/profile', [ProfileController::class, 'index']),

@@ -90,4 +90,18 @@ class UserService
             );
         }, $users);
     }
+
+    public function update(int $id,string $name,?UploadedInterface $image): void
+    {
+        $data = [
+            'name'=>$name,
+
+        ];
+
+        if ($image && ! $image->hasErrors()) {
+            $filePath = $image->move('movies');
+            $data['avatar'] = $filePath;
+        }
+        $this->db->update('users',$data,['id'=>$id]);
+    }
 }

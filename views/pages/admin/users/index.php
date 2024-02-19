@@ -8,7 +8,7 @@
 ?>
 <?php $view->components('start'); ?>
 
-<main>
+
     <div class="container">
         <table class="table table-dark table-hover mt-5">
             <thead>
@@ -28,7 +28,7 @@
                     </td>
                     <td style="width: 200px;"><?php echo $user->getName() ?></td>
                     <td><span class="badge"><?php echo $user->getEmail() ?></span></td>
-                    <td><span class="badge bg-warning warn__badge"><?php echo ($user->getRole()) == 1? 'пользователь':'админ' ?></span></td>
+                    <td><span class="  <?php echo $user->getUserRole()?>  "><?php echo $user->getUserRole()?></span></td>
                     <td>
                         <div class="dropdown d-flex justify-content-end">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -64,4 +64,5 @@
         </table>
     </div>
 </main>
+
 <?php $view->components('end'); ?>

@@ -50,4 +50,21 @@ class User
     {
         return $this->role;
     }
+
+    public function getUserRole()
+    {
+        // Получаем идентификатор роли пользователя
+        $roleId = $this->getRole();
+
+        // Определяем название роли пользователя с помощью оператора switch
+        switch ($roleId) {
+            case 2:
+                return 'admin';
+            case 1:
+                return 'user';
+            default:
+                return 'Неизвестная роль';
+        }
+    }
+
 }

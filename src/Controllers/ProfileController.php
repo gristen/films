@@ -17,7 +17,7 @@ class ProfileController extends Controller
 
         $user = $this->service()->find($userId);
 
-        $this->view('profile', ['user' => $user, 'favorites' => $favorites]);
+        $this->view('profile', ['user' => $user, 'favorites' => $favorites],'Профиль');
 
     }
 

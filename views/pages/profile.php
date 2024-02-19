@@ -35,19 +35,18 @@
             <div class="row">
                 <?php foreach ($favorites as $favoriteMovie) { ?>
                     <div class="col-md-4 mb-4">
-                        <div style=" height: 368px" class="card">
+                        <div style="height: 368px" class="card">
                             <img src="<?php echo $storage->url($favoriteMovie->getPreview()) ?>" style="height: 200px; width: 270px;" class="card-img-top" alt="<?php echo $favoriteMovie->getName() ?>">
                             <div class="card-body">
+                                <input name="movie_id" type="hidden" value="<?php echo $favoriteMovie->getId() ?>">
                                 <h5 class="card-title"><?php echo $favoriteMovie->getName() ?></h5>
                                 <p class="card-text"><?php echo $favoriteMovie->getDescription() ?></p>
-                               <!-- <p class="card-text btn btn-outline-info"><?php /*echo $favoriteMovie->avgRating() */?></p>-->
-
-                                    <button id="btn_del" class="btn btn-danger"  style="position: absolute;bottom:10px;">Удалить из избранного</button>
-
+                                <button class="btn btn-danger btn_del" style="position: absolute;bottom:10px;">Удалить из избранного</button>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
+
             </div>
         </div>
     </div>
@@ -55,24 +54,35 @@
 <script>
 
     $(document).ready(function () {
-        $('body').on('click', '#btn_del', function (event) {
-
+        $('body').on('click', '.btn_del', function (event) {
             event.preventDefault();
-            var user_id = <?php echo $auth->id()?>;
-            var movie_id = $("input[name='id']").val();
+
+            // Получение ID фильма из скрытого поля
+            var movie_id = $(this).closest('.card-body').find("input[name='movie_id']").val();
+            var user_id = <?php echo $auth->user()->getId();?>;
+
+            // Сохранение ссылки на текущий контекст для использования внутри функции обратного вызова AJAX
+            var currentButton = $(this);
+
+            // AJAX-запрос на сервер для удаления фильма из избранного
             $.ajax({
-                method: "GET",
+                method: "get",
                 url: "/favorites/destroy",
                 data: {
-                    user_id: user_id,
                     movie_id: movie_id,
+                    user_id: user_id,
                 }
             })
-                .done(function (msg) {
-                    console.log(msg);
+                .done(function (response) {
+                    // Обработка успешного ответа от сервера
+                    console.log("Фильм удален из избранного");
+                    console.log(response);
+
+                    // Удаление родительского элемента, содержащего информацию о фильме
+                    currentButton.closest('.col-md-4').remove();
                 });
         });
-
     });
+
 </script>
 <?php $view->components('end'); ?>
