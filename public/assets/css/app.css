@@ -78,10 +78,7 @@ body {
    /* padding: 10px 10px 10px 0;*/
 }
 
-html,
-body {
-    height: 100%;
-}
+
 
 .form-signin {
     max-width: 330px;

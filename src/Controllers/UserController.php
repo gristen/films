@@ -26,7 +26,14 @@ class UserController extends Controller
     public function admin(): void
     {
 
-        $this->view('/admin/users/index', ['users' => $this->service()->getUsers()], 'Админ панель');
+        $result = $this->db()->query('SELECT MONTH(create_at) AS month, COUNT(*) AS user_count
+                FROM users
+                WHERE create_at >= DATE_SUB(NOW(), INTERVAL 1 YEAR)
+                GROUP BY MONTH(create_at)');
+
+           $res = $this->service()->getRegUser($result);
+
+        $this->view('/admin/users/index', ['users' => $this->service()->getUsers(),'months'=>$res['months'],'userCount'=>$res['userCount']], 'Админ панель');
     }
 
 

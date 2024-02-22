@@ -156,4 +156,12 @@ class Database implements DatabaseInterface
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(array_merge($data, $conditions));
     }
+
+    public function query(string $sql,$params = []):? array
+    {
+        $sth = $this->pdo->prepare($sql);
+        $res = $sth->execute($params);
+
+        return $sth->fetchAll();
+    }
 }

@@ -104,4 +104,44 @@ class UserService
         }
         $this->db->update('users',$data,['id'=>$id]);
     }
+
+
+    public function getRegUser(array $data):? array
+    {
+
+
+        $userDataFromDatabase =$data;
+
+
+
+        $monthsNames = array(
+            1 => 'Январь',
+            2 => 'Февраль',
+            3 => 'Март',
+            4 => 'Апрель',
+            5 => 'Май',
+            6 => 'Июнь',
+            7 => 'Июль',
+            8 => 'Август',
+            9 => 'Сентябрь',
+            10 => 'Октябрь',
+            11 => 'Ноябрь',
+            12 => 'Декабрь'
+        );
+
+        // Подготовка данных для графика
+        $months = array();
+        $userCounts = array();
+
+        foreach ($userDataFromDatabase as $data) {
+            $months[] = $monthsNames[$data["month"]]; // Получаем название месяца из массива $monthsNames
+            $userCounts[] = $data["user_count"];
+        }
+        return [
+            'months'=>$months,
+            'userCount'=>$userCounts
+        ];
+    }
+
+
 }
