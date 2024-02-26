@@ -9,7 +9,7 @@
 <main>
 
     <div class="container">
-        <h3 class="mt-3">Новинки</h3>
+        <h3 class="mt-3 text-white">Новинки</h3>
 
         <hr>
         <div class="movies">

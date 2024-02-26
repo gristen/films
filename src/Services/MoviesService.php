@@ -94,7 +94,7 @@ class MoviesService
                 $review['created_at'],
                 new User(
                     $user['id'],
-                    $user['name'],
+                    $user['username'],
                     $user['email'],
                     $user['create_at'],
                     $user['id_role'],

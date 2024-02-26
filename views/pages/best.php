@@ -9,7 +9,7 @@
 <?php $view->components('start'); ?>
 <main>
     <div class="container">
-    <h3 class="mt-3">Топ 10 фильмов</h3>
+    <h3 class="mt-3 text-white">Топ 10 фильмов</h3>
         <div class="movies">
     <?php foreach ($movies as $movie) { ?>
         <a href="/movie?id=<?php echo $movie->getId()?>" class="card text-decoration-none movies__item">

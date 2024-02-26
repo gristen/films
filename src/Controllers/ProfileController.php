@@ -14,7 +14,7 @@ class ProfileController extends Controller
     {
         $userId = $this->request()->input('id');
         $favorites = $this->service()->getFavoritesMovies($userId);
-
+        $this->service()->getUserWithRole();
         $user = $this->service()->find($userId);
 
         $this->view('profile', ['user' => $user, 'favorites' => $favorites],'Профиль');

@@ -22,7 +22,7 @@ class UserService
 
         return new User(
             $user['id'],
-            $user['name'],
+            $user['username'],
             $user['email'],
             $user['create_at'],
             $user['id_role'],
@@ -31,16 +31,41 @@ class UserService
         );
     }
 
-    public function store(string $name, string $email, UploadedInterface $avatar, string $password): false|int
+    public function getUserWithRole(): array
+    {
+        $selectFields = 'users.*, roles.name';
+        $joinClauses = [
+            ['type' => '', 'table' => 'roles', 'on' => 'users.id_role = roles.id']
+        ];
+        $tableName = 'users';
+        $conditions = []; // Можете добавить условия, если необходимо
+        $order = []; // Можете указать порядок сортировки, если требуется
+        $limit = -1; // Можете ограничить количество результатов, если нужно
+
+        $users = $this->db->join($selectFields, $tableName, $joinClauses, $order, $limit);
+
+        return array_map(function ($user){
+
+            return new User(
+                $user['id'],
+                $user['username'],
+                $user['email'],
+                $user['create_at'],
+                $user['id_role'],
+                $user['avatar'],
+                $user['password'],
+            );
+        },$users);
+    }
+
+    public function store(string $name, string $email, string $password): false|int
     {
 
-        $avatarPath = $avatar->move('/user/avatars');
-
         return $this->db->insert('users', [
-            'name' => $name,
+            'username' => $name,
             'email' => $email,
             'password' => $password,
-            'avatar' => $avatarPath,
+            'avatar' => "/user/avatars/defaultAvatar.jpg",
             'id_role' => 1,
 
         ]);

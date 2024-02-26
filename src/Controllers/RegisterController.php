@@ -34,7 +34,6 @@ class RegisterController extends Controller
         $this->service()->store(
             $this->request()->input('name'),
             $this->request()->input('email'),
-            $this->request()->file('avatar'),
             password_hash($this->request()->input('password'), PASSWORD_DEFAULT),
         );
 

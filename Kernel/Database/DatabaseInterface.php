@@ -14,4 +14,5 @@ interface DatabaseInterface
 
     public function update(string $table, array $data, array $conditions);
     public function query(string$sql, $params=[]);
+    public function join(string $selectFields,string $tableName,$joinClauses = []);
 }

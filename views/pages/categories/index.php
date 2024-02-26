@@ -9,7 +9,7 @@
 <main>
 
     <div class="container">
-        <h3 class="mt-3">Жанры</h3>
+        <h3 class="mt-3 text-white">Жанры</h3>
         <hr>
         <div class="movies">
             <?php foreach ($categories as $category){ ?>

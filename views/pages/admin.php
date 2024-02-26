@@ -9,7 +9,7 @@
 <?php $view->components('start'); ?>
 <main>
     <div class="container">
-        <h3 class="mt-3">Панель Администратора</h3>
+        <h3 class="mt-3 text-white">Панель Администратора</h3>
             <div class="d-flex justify-content-center ">
                 <a class="btn btn-dark mt-2 mb-2 " href="/admin/users">Список пользователей</a>
             </div>

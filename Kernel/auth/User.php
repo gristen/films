@@ -6,7 +6,7 @@ class User
 {
     public function __construct(
         private int $id,
-        private string $name,
+        private string $username,
         private string $email,
         private string $create_at,
         private string $role,
@@ -33,7 +33,7 @@ class User
 
     public function getName(): string
     {
-        return $this->name;
+        return $this->username;
     }
 
     public function getCreateAt(): string
@@ -51,7 +51,7 @@ class User
         return $this->role;
     }
 
-    public function getUserRole()
+    public function getUserRole(): string
     {
         // Получаем идентификатор роли пользователя
         $roleId = $this->getRole();

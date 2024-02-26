@@ -15,11 +15,11 @@
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card">
                 <img src="<?php echo $storage->url($user->getAvatar()) ?>" class="card-img-top" alt="User Avatar">
                 <div class="card-body">
-                    <h5 class="card-title ">Имя пользователя: <span class="<?php echo $user->getUserRole()?>"><?php echo $user->getName(); ?></span></h5>
+                    <h5 class="card-title ">Имя пользователя: <span class=""><?php echo $user->getName(); ?></span></h5>
                     <p class="card-text">Емайл: <?php echo $user->getEmail(); ?></p>
                     <p class="card-text ">  Статус: <small>
                       <?php echo $user->getUserRole() ?>
@@ -30,8 +30,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
-            <h2>Избранные фильмы</h2>
+        <div class="col-md-9">
+            <h2 class="text-white">Избранные фильмы</h2>
             <div class="row">
                 <?php foreach ($favorites as $favoriteMovie) { ?>
                     <div class="col-md-4 mb-4">
