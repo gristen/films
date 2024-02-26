@@ -124,6 +124,7 @@ class Database implements DatabaseInterface
 
     public function update(string $table, array $data, array $conditions): void
     {
+
         $fields = array_keys($data);
         $set = implode(', ', array_map(fn ($field) => "$field = :$field", $fields));
         $where = '';

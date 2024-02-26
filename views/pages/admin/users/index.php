@@ -70,7 +70,7 @@
                 </table>
             </div>
             <div class="col-lg-6">
-                <h2 class="mt-5">Статистика регистраций пользователей</h2>
+                <h2 class="mt-5 text-white">Статистика регистраций пользователей</h2>
                 <canvas class="mt-5" id="myChart" width="600" height="400"></canvas>
                 <script>
 

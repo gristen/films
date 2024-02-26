@@ -105,7 +105,7 @@ class UserService
 
             return new User(
                 $user['id'],
-                $user['name'],
+                $user['username'],
                 $user['email'],
                 $user['create_at'],
                 $user['id_role'],
@@ -119,7 +119,7 @@ class UserService
     public function update(int $id,string $name,?UploadedInterface $image): void
     {
         $data = [
-            'name'=>$name,
+            'username'=>$name,
 
         ];
 
