@@ -14,7 +14,9 @@ body {
     animation: flickerAnimation 1.5s infinite alternate; /* Анимация мерцания */
 }
 
-
+.card{
+    background-color: #3c4147;
+}
 .card-body{
     background-color: #3c4147;
 }
@@ -74,8 +76,14 @@ body {
 .film{
     margin-top: 20%;
     margin-bottom: 10%;
-    border-top: black 1px solid;
+   /* border-top: black 1px solid;*/
 }
+
+h1,h2,h3,h4{
+    color: white;
+}
+
+
 
 .one-movie__reviews {
     display: flex;
