@@ -47,9 +47,8 @@
                         </div>
                     <div class="film">
                         <div class="col-md-12 mt-5 mb-5">
-                            <video controls class="img-fluid rounded one-movie__image">
-                                <source src="<?php echo $storage->url($movie->getFilm()) ?>" type="video/mp4">
-                                Ваш браузер не поддерживает видео.
+                            <video id="player" class="plyr_player" crossorigin playsinline controls>
+                                <source src="<?php echo $storage->url($movie->getFilm()) ?>" type="video/mp4" size="1080" />
                             </video>
                         </div>
                     </div>
@@ -118,6 +117,11 @@
             </div>
         </div>
     </main>
+    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+    <script>
+        const player = new Plyr('#player');
+    </script>
+
     <script>
         $(document).ready(function () {
 

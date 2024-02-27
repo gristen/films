@@ -3,6 +3,7 @@
 use App\Controllers\AdminController;
 use App\Controllers\CategoriesController;
 use App\Controllers\HomeController;
+use App\Controllers\NewController;
 use App\Controllers\LoginController;
 use App\Controllers\MovieController;
 use App\Controllers\ProfileController;
@@ -15,8 +16,9 @@ use App\Middleware\GuestMiddleware;
 
 return [
 
-    Route::get('/home', [HomeController::class, 'index']),
+    Route::get('/new', [NewController::class, 'index']),
     Route::get('/', [HomeController::class, 'index']),
+    Route::get('/home', [HomeController::class, 'index']),
 
     Route::get('/register', [RegisterController::class, 'index'], [GuestMiddleware::class]),
     Route::get('/login', [LoginController::class, 'index'], [GuestMiddleware::class]),

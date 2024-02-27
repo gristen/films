@@ -2,8 +2,14 @@
 
 namespace App\Kernel\Validator;
 
+use App\Kernel\Database\DatabaseInterface;
+
 class Validator implements ValidatorInterface
 {
+    public function __construct(private DatabaseInterface $db)
+    {
+    }
+
     private array $errors = [];
 
     private array $data;
@@ -72,8 +78,17 @@ class Validator implements ValidatorInterface
                     return "Field $key must be confirmed";
                 }
                 break;
-            case'passwordDB':
 
+            case'findUsername':
+                if (is_array($this->db->first('users',['username'=>$value]))){
+                    return "Имя должно быть уникальным";
+                }
+                break;
+            case'findEmail':
+                if (is_array($this->db->first('users',['email'=>$value]))){
+                    return "email должно быть уникальным";
+                }
+                break;
         }
 
         return false;
