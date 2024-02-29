@@ -102,7 +102,7 @@ class MovieController extends Controller
     public function service(): MoviesService
     {
         if (! isset($this->service)) {
-            $this->service = new MoviesService($this->db());
+            $this->service = new MoviesService($this->db(),$this->storage());
         }
 
         return $this->service;

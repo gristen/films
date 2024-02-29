@@ -45,6 +45,7 @@ class Container
 
     public readonly StorageInterface $storage;
 
+
     public function __construct()
     {
         $this->registerServices();
@@ -62,6 +63,7 @@ class Container
         $this->redirect = new Redirect();
         $this->auth = new Auth($this->database, $this->session, $this->config);
         $this->storage = new Storage($this->config);
+
         $this->view = new View($this->session, $this->auth, $this->storage);
         $this->router = new Router(
             $this->view,

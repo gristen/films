@@ -79,9 +79,10 @@ class Validator implements ValidatorInterface
                 }
                 break;
 
-            case'findUsername':
-                if (is_array($this->db->first('users',['username'=>$value]))){
-                    return "Имя должно быть уникальным";
+            case'uniq':
+
+                if (is_array($this->db->first('users',[$key=>$value]))){
+                    return "Поле $key уже зарегистрированно";
                 }
                 break;
             case'findEmail':

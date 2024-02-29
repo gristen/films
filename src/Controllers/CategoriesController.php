@@ -7,6 +7,7 @@ use App\Services\CategoryService;
 
 class CategoriesController extends Controller
 {
+    private CategoryService $service;
     public function create(): void
     {
         $this->view('admin/categories/add');
@@ -80,6 +81,12 @@ class CategoriesController extends Controller
 
         $service->insert($this->request()->input('name'),$this->request()->file('image'));
         $this->redirect('/admin');
+    }
+
+
+    public function getCategorise(): array
+    {
+      return $this->service()->all();
     }
 
 

@@ -4,13 +4,16 @@ namespace App\Services;
 
 use App\Kernel\auth\User;
 use App\Kernel\Database\DatabaseInterface;
+use App\Kernel\Storage\StorageInterface;
 use App\Kernel\upload\UploadedInterface;
 use App\Models\Movie;
 use App\Models\Review;
 
 class MoviesService
 {
-    public function __construct(private readonly DatabaseInterface $db)
+
+
+    public function __construct(private readonly DatabaseInterface $db, private ?StorageInterface $storage=null)
     {
 
     }
@@ -51,7 +54,18 @@ class MoviesService
 
     public function destroy(int $id): void
     {
+        $movie = $this->db->first('movies',['id'=>$id]);
+        $preview = $movie['preview'];
+
+        $url = APP_PATH ."/storage".$preview;
+        if (file_exists($url)) {unlink($url);}
+
         $this->db->delete('movies', ['id' => $id]);
+
+
+
+
+
     }
 
     public function find(int $id): ?Movie

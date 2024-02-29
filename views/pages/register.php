@@ -22,15 +22,15 @@
                         <div class="form-floating">
                             <input
                                     type="text"
-                                    class="form-control <?php echo $session->has('name') ? 'is-invalid' : '' ?>"
+                                    class="form-control <?php echo $session->has('username') ? 'is-invalid' : '' ?>"
                                     id="name"
-                                    name="name"
+                                    name="username"
                                     placeholder="Иван Иванов"
                             >
                             <label for="name">Имя</label>
-                            <?php if ($session->has('name')) { ?>
+                            <?php if ($session->has('username')) { ?>
                                 <div id="name" class="invalid-feedback">
-                                    <?php echo $session->getFlash('name')[0] ?>
+                                    <?php echo $session->getFlash('username')[0] ?>
                                 </div>
                             <?php } ?>
                         </div>

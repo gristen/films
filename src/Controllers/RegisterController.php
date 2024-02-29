@@ -17,8 +17,8 @@ class RegisterController extends Controller
     public function register(): void
     {
         $validation = $this->request()->validate([
-            'name' => ['required', 'max:255','findUsername'],
-            'email' => ['required', 'email','findEmail'],
+            'username' => ['required', 'max:255','uniq'],
+            'email' => ['required', 'email'],
             'password' => ['required', 'min:3'],
             'password_confirmation' => ['required', 'min:3'],
 
@@ -33,7 +33,7 @@ class RegisterController extends Controller
         }
 
         $this->service()->store(
-            $this->request()->input('name'),
+            $this->request()->input('username'),
             $this->request()->input('email'),
             password_hash($this->request()->input('password'), PASSWORD_DEFAULT),
         );

@@ -9,7 +9,7 @@ use App\Models\Movie;
 
 class CategoryService
 {
-    public function __construct(private readonly DatabaseInterface $db)
+    public function __construct(private  DatabaseInterface $db)
     {
 
     }

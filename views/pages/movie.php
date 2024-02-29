@@ -117,6 +117,7 @@
             </div>
         </div>
     </main>
+
     <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
     <script>
         const player = new Plyr('#player');
