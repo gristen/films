@@ -27,6 +27,7 @@ class UserService
             $user['create_at'],
             $user['id_role'],
             $user['avatar'],
+            $user['nickname_style'],
             $user['password'],
         );
     }
@@ -53,6 +54,7 @@ class UserService
                 $user['create_at'],
                 $user['id_role'],
                 $user['avatar'],
+                $user['nickname_style'],
                 $user['password'],
             );
         },$users);
@@ -110,11 +112,46 @@ class UserService
                 $user['create_at'],
                 $user['id_role'],
                 $user['avatar'],
+                $user['nickname_style'],
                 $user['password'],
 
             );
         }, $users);
     }
+
+    public function getPagesCount(int $itemsPerPage): int
+    {
+        $res = $this->db->query("SELECT COUNT(*) AS cnt FROM users; ");
+        // Получение значения cnt из первого элемента массива
+        $count = $res[0]['cnt'];
+        return ceil($count / $itemsPerPage);
+    }
+
+    public function getPage(int $pageNum, int $itemsPerPage): array
+    {
+        // Рассчитываем смещение для текущей страницы
+        $offset = ($pageNum - 1) * $itemsPerPage;
+
+        // Выполняем запрос к базе данных с использованием LIMIT и OFFSET
+        $users = $this->db->query("SELECT * FROM users ORDER BY id DESC LIMIT $itemsPerPage OFFSET $offset; ");
+        return array_map(function ($user) {
+
+            return new User(
+                $user['id'],
+                $user['username'],
+                $user['email'],
+                $user['create_at'],
+                $user['id_role'],
+                $user['avatar'],
+                $user['nickname_style'],
+                $user['password'],
+
+            );
+        }, $users);
+        // Возвращаем полученных пользователей
+        return $users;
+    }
+
 
     public function update(int $id,string $name,?UploadedInterface $image): void
     {

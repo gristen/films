@@ -11,6 +11,7 @@ class User
         private string $create_at,
         private string $role,
         private string $avatar,
+        private ?string $nicknameStyle,
         private string $password,
     ) {
 
@@ -65,6 +66,14 @@ class User
             default:
                 return 'Неизвестная роль';
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getNicknameStyle(): string
+    {
+        return $this->nicknameStyle;
     }
 
 }

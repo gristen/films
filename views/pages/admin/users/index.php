@@ -15,7 +15,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <table class="table table-dark table-hover mt-5">
                     <thead>
                     <tr>
@@ -28,6 +28,7 @@
                     </thead>
                     <tbody>
                     <?php foreach ($users as $user) { ?>
+
                         <tr>
                             <td style="width: 200px;">
                                 <img width="100px" src="<?php echo $storage->url($user->getAvatar()) ?>" alt="">
@@ -68,6 +69,15 @@
                     <?php } ?>
                     </tbody>
                 </table>
+                <div style="text-align: center">
+                    <?php for ($pageNum = 1; $pageNum <= $pagesCount; $pageNum++): ?>
+                        <?php if ($currentPageNum === $pageNum): ?>
+                            <b><?= $pageNum ?></b>
+                        <?php else: ?>
+                            <a href="/admin/users?Pagid=<?= $pageNum === 1 ? '' : $pageNum ?>"><?= $pageNum ?></a>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </div>
             </div>
             <div class="col-lg-6">
                 <h2 class="mt-5 text-white">Статистика регистраций пользователей</h2>

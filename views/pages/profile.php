@@ -57,7 +57,7 @@
             <h2 class="text-white mb-4">Профиль пользователя</h2>
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Имя пользователя: <?php echo $user->getName(); ?></h5>
+                    <h5 class="card-title" style="color:<?php echo $user->getNicknameStyle()?>;">Имя пользователя: <?php echo $user->getName(); ?></h5>
                     <p class="card-text">Email: <?php echo $user->getEmail(); ?></p>
                     <p class="card-text">Статус: <?php echo $user->getUserRole(); ?></p>
                     <p class="card-text">Дата регистрации: <?php echo $user->getCreateAt(); ?></p>
