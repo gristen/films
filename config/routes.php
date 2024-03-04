@@ -50,7 +50,7 @@ return [
     Route::post('/user/update', [UserController::class, 'update']),
     Route::post('/admin/user/update', [UserController::class, 'update']),
     //
-
+    Route::get('/admin/reviews/index', [AdminController::class, 'reviews']),
     Route::get('/profile', [ProfileController::class, 'index']),
 
     Route::get('/favorites', [UserController::class, 'favorites']),

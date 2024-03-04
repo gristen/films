@@ -86,5 +86,38 @@
 
     </div>
 </div>
+<script>
 
+    $(document).ready(function () {
+        $('body').on('click', '.btn_del', function (event) {
+            event.preventDefault();
+
+            // Получение ID фильма из скрытого поля
+            var movie_id = $(this).closest('.card-body').find("input[name='movie_id']").val();
+            var user_id = <?php echo $auth->user()->getId();?>;
+
+            // Сохранение ссылки на текущий контекст для использования внутри функции обратного вызова AJAX
+            var currentButton = $(this);
+
+            // AJAX-запрос на сервер для удаления фильма из избранного
+            $.ajax({
+                method: "get",
+                url: "/favorites/destroy",
+                data: {
+                    movie_id: movie_id,
+                    user_id: user_id,
+                }
+            })
+                .done(function (response) {
+                    // Обработка успешного ответа от сервера
+                    console.log("Фильм удален из избранного");
+                    console.log(response);
+
+                    // Удаление родительского элемента, содержащего информацию о фильме
+                    currentButton.closest('.col-md-4').remove();
+                });
+        });
+    });
+
+</script>
 <?php $view->components('end'); ?>

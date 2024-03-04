@@ -18,4 +18,9 @@ class AdminController extends Controller
             'movies' => $movies->all(),
         ], 'Админ панель');
     }
+
+    public function reviews(): void
+    {
+        $this->view('/admin/reviews/reviews');
+    }
 }

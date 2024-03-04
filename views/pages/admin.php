@@ -10,8 +10,9 @@
 <main>
     <div class="container">
         <h3 class="mt-3 text-white">Панель Администратора</h3>
-            <div class="d-flex justify-content-center ">
+            <div class="d-flex justify-content-evenly ">
                 <a class="btn btn-dark mt-2 mb-2 " href="/admin/users">Список пользователей</a>
+                <a class="btn btn-dark mt-2 mb-2 " href="/admin/reviews/index">Список отзывов</a>
             </div>
        
         <hr>

@@ -25,9 +25,9 @@ class UserController extends Controller
 
     public function admin(): void
     {
-        // Получаем номер страницы из параметра Pagid или устанавливаем значение по умолчанию равным 1
-        $pageNum = $this->request()->input('Pagid') ? (int)$this->request()->input('Pagid') : 1;
 
+        $pageNum = $this->request()->input('Pagid') ? (int)$this->request()->input('Pagid') : 1;
+        //TODO: перенести в сервис логику с БД
         $result = $this->db()->query('SELECT MONTH(create_at) AS month, COUNT(*) AS user_count
         FROM users
         WHERE create_at >= DATE_SUB(NOW(), INTERVAL 1 YEAR)
@@ -35,20 +35,20 @@ class UserController extends Controller
 
         $res = $this->service()->getRegUser($result);
 
-        // Получаем массив пользователей для текущей страницы
-        $users = $this->service()->getPage($pageNum, 3);
 
-        // Получаем общее количество страниц
-        $pagesCount = $this->service()->getPagesCount(3);
+        $users = $this->service()->getPage($pageNum, 5);
 
-        // Получаем общее количество пользователей
+
+        $pagesCount = $this->service()->getPagesCount(5);
+
+
         $userCount = count($users);
 
         // В контроллере admin()
         $this->view('/admin/users/index', [
             'users' => $users,
             'months' => $res['months'],
-            'userCount' => $userCount, // Передаем общее количество пользователей
+            'userCount' => $userCount,
             'pagesCount' => $pagesCount,
             'currentPageNum' => $pageNum,
         ]);

@@ -69,15 +69,23 @@
                     <?php } ?>
                     </tbody>
                 </table>
-                <div style="text-align: center">
+
+                <nav aria-label="...">
+
+
+                <ul class="pagination pagination-sm">
+
                     <?php for ($pageNum = 1; $pageNum <= $pagesCount; $pageNum++): ?>
+
                         <?php if ($currentPageNum === $pageNum): ?>
                             <b><?= $pageNum ?></b>
                         <?php else: ?>
-                            <a href="/admin/users?Pagid=<?= $pageNum === 1 ? '' : $pageNum ?>"><?= $pageNum ?></a>
+
+                            <li class="page-item <?php if ($pageNum === (int)$_GET['Pagid']){ echo 'active';} ?> "> <a class="page-link  " href="/admin/users?Pagid=<?= $pageNum === 1 ? '' : $pageNum ?>"><?= $pageNum ?></a></li>
                         <?php endif; ?>
                     <?php endfor; ?>
-                </div>
+                </ul>
+                </nav>
             </div>
             <div class="col-lg-6">
                 <h2 class="mt-5 text-white">Статистика регистраций пользователей</h2>
