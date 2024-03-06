@@ -113,6 +113,7 @@ class MoviesService
                     $user['create_at'],
                     $user['id_role'],
                     $user['avatar'],
+                    $user['nickname_style'],
                     $user['password'],
                 )
             );
@@ -189,7 +190,9 @@ class MoviesService
             );
 
             $movies[] = $movie;
+
         }
+
 
         // Сортировка массива фильмов по среднему рейтингу
         usort($movies, function($a, $b) {

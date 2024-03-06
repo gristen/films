@@ -14,8 +14,7 @@ class HomeController extends Controller
 
         $movies = new MoviesService($this->db());
         $categories = new CategoryService($this->db());
-
-        $this->view('home', [
+          $this->view('home', [
             'newMovies' => $movies->newMovies(),
             'bests' => $movies->getBestMovies(),
              'categories' =>$categories->all() ,

@@ -48,7 +48,7 @@ class UserController extends Controller
         $this->view('/admin/users/index', [
             'users' => $users,
             'months' => $res['months'],
-            'userCount' => $userCount,
+            'userCount' => $res['userCount'],
             'pagesCount' => $pagesCount,
             'currentPageNum' => $pageNum,
         ]);

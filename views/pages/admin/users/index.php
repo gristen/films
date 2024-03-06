@@ -94,6 +94,7 @@
 
                     let months = <?php  echo json_encode($months); ?>;
                     let userCounts = <?php echo json_encode($userCount); ?>;
+                    console.log(months,userCounts);
 
                     // Построение графика с использованием Chart.js
                     let ctx = document.querySelector('#myChart').getContext('2d');

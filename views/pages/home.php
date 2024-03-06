@@ -31,11 +31,11 @@
         <div class="new d-flex">
             <?php foreach ($bests as $best) { ?>
                 <a href="/movie?id=<?php echo $best->getId()?>" class="card text-decoration-none movies__item mx-2">
-                    <img    src="<?php echo $storage->url($movie->getPreview()); ?>" height="150px" class="card-img-top" alt="">
+                    <img    src="<?php echo $storage->url($best->getPreview()); ?>" height="150px" class="card-img-top" alt="">
                     <div  class="card-body">
-                        <h5 class="card-title"><?php echo $movie->getName(); ?></h5>
-                        <p class="card-text">Оценка <span class="badge bg-warning warn__badge"><?php echo $movie->avgRating() ?></span></p>
-                        <p class="card-text"><?php echo $movie->getDescription(); ?></p>
+                        <h5 class="card-title"><?php echo $best->getName(); ?></h5>
+                        <p class="card-text">Оценка <span class="badge bg-warning warn__badge"><?php echo $best->avgRating() ?></span></p>
+                        <p class="card-text"><?php echo $best->getDescription(); ?></p>
                     </div>
                 </a>
             <?php } ?>
