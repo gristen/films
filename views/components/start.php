@@ -11,7 +11,8 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> <?php echo $view->getTitle() ?></title>
-
+    <link type="image/x-icon" href="/storage/icons8-фильм-16.png" rel="shortcut icon">
+    <link type="Image/x-icon" href="/storage/icons8-фильм-16.png" rel="icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
     <script
             src="https://code.jquery.com/jquery-3.7.1.js"

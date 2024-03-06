@@ -27,7 +27,7 @@
                 </a>
             <?php } ?>
         </div>
-        <h1 class="text-white">лучшиее</h1>
+        <h1 class="text-white">лучшие</h1>
         <div class="new d-flex">
             <?php foreach ($bests as $best) { ?>
                 <a href="/movie?id=<?php echo $best->getId()?>" class="card text-decoration-none movies__item mx-2">
