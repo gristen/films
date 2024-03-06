@@ -1,62 +1,40 @@
-<?php
-/**
- * @var \App\Kernel\View\ViewInterface $view
- * @var \App\Kernel\Storage\StorageInterface $storage
- * @var array<\App\Models\Category> $categories
- * @var array<\App\Kernel\Auth\User> $users
- * @var array $months
- * @var array $userCount
- */
-
-
-?>
 <?php $view->components('start'); ?>
 
 
 <div class="container">
     <div class="row">
-        <div class="accordion bg-dark  accordion-flush" id="accordionFlushExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        <table class="table table-dark table-hover">
-                            <tr>
-                                <td style="width: 200px;">
-                                    <img style="width: 200px;" src="https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg" alt="">
-                                </td>
-                                <td style="width: 200px;">title</td>
-                                <td style="width: 200px;">discription</td>
-                            </tr>
-                        </table>
-                    </button>
-                </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
+        <h1 class="mt-5 mb-5">Панель модератора</h1>
+        <?php foreach ($reviews as $review): ?>
+            <div class="col-lg-6 mb-3">
+                <div class="accordion bg-dark accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?= $review['id'] ?>" aria-expanded="false" aria-controls="flush-collapse<?= $review['id'] ?>">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4">
+                                        <img class="img-fluid rounded" src="<?= $storage->url($review['movie_name']) ?>" >
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4>Название: <?= $review['name'] ?></h4>
+                                        <p>ID пользователя, который оставил отзыв: <?= $review['user_id'] ?></p>
 
+                                    </div>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="flush-collapse<?= $review['id'] ?>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body bg-dark text-white">
+                                <p><strong>Автор:</strong> <?= $review['username'] ?></p>
+                                <p><strong>Отзыв:</strong> <?= $review['review'] ?></p>
+                                <p><strong>Оценка:</strong> <?= $review['rating'] ?></p>
+                                <button class=" btn btn-danger">Удалить отзыв</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                        Accordion Item #2
-                    </button>
-                </h2>
-                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                        Accordion Item #3
-                    </button>
-                </h2>
-                <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                </div>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 </div>
+
 <?php $view->components('end'); ?>

@@ -92,11 +92,10 @@
                 <canvas class="mt-5" id="myChart" width="600" height="400"></canvas>
                 <script>
 
-                    let months = <?php  echo json_encode($months); ?>;
+                    let months = <?php echo json_encode($months); ?>;
                     let userCounts = <?php echo json_encode($userCount); ?>;
                     console.log(months,userCounts);
 
-                    // Построение графика с использованием Chart.js
                     let ctx = document.querySelector('#myChart').getContext('2d');
                     let myChart = new Chart(ctx, {
                         type: 'line',
@@ -105,7 +104,7 @@
                             datasets: [{
                                 label: 'Количество зарегистрированных пользователей',
                                 data: userCounts,
-                                borderColor: '#ff00f2',
+                                borderColor: '#c90bc7',
                                 borderWidth: 4,
                             }],
                         },
@@ -117,7 +116,7 @@
                                         stepSize: 1,
                                     }
                                 }
-                            },
+                            }
                         }
                     });
                 </script>

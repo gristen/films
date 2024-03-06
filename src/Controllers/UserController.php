@@ -42,7 +42,6 @@ class UserController extends Controller
         $pagesCount = $this->service()->getPagesCount(5);
 
 
-        $userCount = count($users);
 
         // В контроллере admin()
         $this->view('/admin/users/index', [

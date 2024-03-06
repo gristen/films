@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Kernel\Controller\Controller;
 use App\Services\CategoryService;
 use App\Services\MoviesService;
+use App\Services\ReviewService;
 
 class AdminController extends Controller
 {
@@ -21,6 +22,9 @@ class AdminController extends Controller
 
     public function reviews(): void
     {
-        $this->view('/admin/reviews/reviews');
+        $service = new ReviewService($this->db());
+       $reviews= $service->getAllReviews();
+
+        $this->view('/admin/reviews/reviews',['reviews'=>$reviews]);
     }
 }
