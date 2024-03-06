@@ -32,7 +32,7 @@
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                    </div>w
                     <div class="modal-body">
                         <form method="post" enctype="multipart/form-data" action="/user/update">
                             <div class="mb-3">
